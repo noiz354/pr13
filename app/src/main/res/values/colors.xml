@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="white">#ffffff</color>
+    <color name="grey">#EDEDED</color>
+    <color name="grey_strong">#BEBEBE</color>
+    <color name="greenblue">#62C6E0</color>
+    <color name="greenblue_touch">#C5E9F3</color>
+</resources>
