@@ -51,8 +51,6 @@ public class MainActivityTest {
     @Test
     public void performSettingClick(){
         onView(withId(R.id.action_settings)).perform(click());
-
-        // TODO add checking if toast is created.
     }
 
     @Test
