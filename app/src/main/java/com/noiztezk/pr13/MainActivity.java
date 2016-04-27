@@ -94,8 +94,6 @@ public class MainActivity extends AppCompatActivity implements MainActivityView 
 
             Example example = gson.fromJson(bufferString, Example.class);
             dzkrs = example.getDzkir();
-
-//            dzkrs = JsonHelper.readPR13(is);
         }
 
         int searchIndex = -1;

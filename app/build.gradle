@@ -32,18 +32,15 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
+
     //[START] Dagger dependency
     // apt command comes from the android-apt plugin
     apt 'com.google.dagger:dagger-compiler:2.2'
     compile 'com.google.dagger:dagger:2.2'
     provided 'javax.annotation:jsr250-api:1.0'
     //[END] Dagger dependency
+
     compile 'com.android.support:appcompat-v7:23.2.1'
-    // Unit testing dependencies
-    testCompile 'junit:junit:4.12'
-    // Set this dependency if you want to use the Hamcrest matcher library
-    testCompile 'org.hamcrest:hamcrest-library:1.3'
-    // more stuff, e.g., Mockito
     compile project(':libraryCircle')
 
     //[START] This is for parsing json
@@ -55,7 +52,15 @@ dependencies {
     apt 'org.parceler:parceler:1.1.1'
     //[START] This is for parcelable
 
+    //[START]
+    compile 'com.google.guava:guava:18.0'
+
     //[START] This is for testing
+    // Unit testing dependencies
+    testCompile 'junit:junit:4.12'
+    // Set this dependency if you want to use the Hamcrest matcher library
+    testCompile 'org.hamcrest:hamcrest-library:1.3'
+    // more stuff, e.g., Mockito
     androidTestCompile 'com.android.support.test:runner:0.3'
     androidTestCompile 'com.android.support.test:rules:0.3'
     androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2'
