@@ -1,5 +1,6 @@
 package com.noiztezk.pr13;
 
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,8 +11,11 @@ import android.widget.AbsListView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.noiztezk.pr13.interfaces.MainActivityView;
+import com.noiztezk.pr13.model.Dzikir;
 import com.noiztezk.pr13.model.Dzkr;
+import com.noiztezk.pr13.model.Example;
 import com.noiztezk.pr13.presenters.MainActivityPresenter;
 import com.noiztezk.pr13.presenters.MainActivityPresenterImpl;
 import com.noiztezk.pr13.utils.Constants;
@@ -24,16 +28,26 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.List;
 
+import javax.inject.Inject;
+
 public class MainActivity extends AppCompatActivity implements MainActivityView {
     ListView dzkrListView;
     DzkirAdapter dzkrListViewAdapter;
-    Dzkr data;
-    List dzkrs;
+    Dzikir data;
+    List<Dzikir> dzkrs;
     MainActivityPresenter mainActivityPresenter;
+
+    @Inject
+    SharedPreferences sharedPreferences;
+
+    @Inject
+    Gson gson;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        ((PRThirteenApplication)getApplication()).getmNetComponent().inject(this);
 
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);;
@@ -46,7 +60,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityView 
         if(getIntent() != null){
             if(getIntent().getParcelableExtra(Constants.customObject[2]) != null){
                 data = getIntent().getParcelableExtra(Constants.customObject[2]);
-                dzkrs = getIntent().getParcelableArrayListExtra(Constants.customObject[5]);
+//                dzkrs = getIntent().getParcelableArrayListExtra(Constants.customObject[5]);
             }
         }
 
@@ -72,8 +86,19 @@ public class MainActivity extends AppCompatActivity implements MainActivityView 
     }
 
     private void initListView() throws Exception {
-        if(dzkrs == null)
-            dzkrs = JsonHelper.readPR13(getAssets().open("def_pr13.json"));
+        if(dzkrs == null) {
+            InputStream is = getAssets().open("def_pr13.json");
+            int size = is.available();
+            byte[] buffer = new byte[size];
+            is.read(buffer);
+            is.close();
+            String bufferString = new String(buffer);
+
+            Example example = gson.fromJson(bufferString, Example.class);
+            dzkrs = example.getDzkir();
+
+//            dzkrs = JsonHelper.readPR13(is);
+        }
 
         int searchIndex = -1;
         Log.d("MNORMANSYAH", "using contain MNORMANSYAH search " + (searchIndex = dzkrs.indexOf(data)));

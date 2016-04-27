@@ -17,8 +17,11 @@ import android.widget.TextView;
 import com.noiztezk.pr13.DzkirDetailActivity;
 import com.noiztezk.pr13.MainActivity;
 import com.noiztezk.pr13.R;
+import com.noiztezk.pr13.model.Dzikir;
 import com.noiztezk.pr13.model.Dzkr;
 import com.noiztezk.pr13.utils.Constants;
+
+import org.parceler.Parcels;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,23 +32,22 @@ import java.util.List;
 public class DzkirAdapter extends BaseAdapter{
 
     // TODO determine the best data structure for searching and sorting
-//    Set<Dzkr> dzkir;
-    List<Dzkr> dzkrs;
+    List<Dzikir> dzikirs;
     MainActivity mContext;
 
-    public DzkirAdapter(@NonNull List<Dzkr> dzkrs, @NonNull MainActivity mContext){
-        this.dzkrs = dzkrs;
+    public DzkirAdapter(@NonNull List<Dzikir> dzkrs, @NonNull MainActivity mContext){
+        this.dzikirs = dzkrs;
         this.mContext = mContext;
     }
 
     @Override
     public int getCount() {
-        return dzkrs.size();
+        return dzikirs.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return dzkrs.get(position);
+        return dzikirs.get(position);
     }
 
     @Override
@@ -66,14 +68,15 @@ public class DzkirAdapter extends BaseAdapter{
         } else {
             viewHolder = (DzkirListViewHolder) v.getTag();
         }
-        int count = ((Dzkr) getItem(position)).count;
+        Dzikir item = (Dzikir) getItem(position);
+        int count = Integer.parseInt(item.getCount());
         String temp = "";
         if(count < 0)
             temp += "bebas";
         else
             temp += count;
         viewHolder.count.setText(temp);
-        viewHolder.text.setText(((Dzkr)getItem(position)).text+"");
+        viewHolder.text.setText(item.getText()+"");
         Typeface tf = Typeface.createFromAsset(mContext.getAssets(), "MTCORSVA.ttf");
         viewHolder.text.setTypeface(tf);
         // TODO ImageButton separation
@@ -95,10 +98,10 @@ public class DzkirAdapter extends BaseAdapter{
     }
 
     class textOnClick implements View.OnClickListener{
-        Dzkr data;
+        Dzikir data;
         int position = -1;
         public textOnClick(int position){
-            this.data = (Dzkr)getItem(this.position = position);
+            this.data = (Dzikir)getItem(this.position = position);
         }
 
         @SuppressWarnings("NewApi")
@@ -107,8 +110,8 @@ public class DzkirAdapter extends BaseAdapter{
             Intent moveToAnotherActivity = new Intent(mContext, DzkirDetailActivity.class);
             Bundle bndlanimation =
                     ActivityOptions.makeCustomAnimation(mContext, R.anim.animation, R.anim.animation2).toBundle();
-            moveToAnotherActivity.putExtra(Constants.customObject[0], data);
-            moveToAnotherActivity.putParcelableArrayListExtra(Constants.customObject[3], (ArrayList<Dzkr>) dzkrs);
+            moveToAnotherActivity.putExtra(Constants.customObject[0], Parcels.wrap(data));
+            moveToAnotherActivity.putExtra(Constants.customObject[3], Parcels.wrap(dzikirs));
             moveToAnotherActivity.putExtra(Constants.customObject[4], position);
             mContext.startActivity(moveToAnotherActivity, bndlanimation);
             mContext.finish();

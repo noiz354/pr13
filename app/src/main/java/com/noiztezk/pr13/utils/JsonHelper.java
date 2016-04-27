@@ -16,8 +16,9 @@ import java.util.List;
 
 /**
  * Created by m.normansyah on 7/23/15.
- * TODO Create documentation and unit testing upon this class.
+ * This is replaced by Gson
  */
+@Deprecated
 public class JsonHelper {
     public static final String default_string = "kosong";
     public static final int default_integer = -999

@@ -5,6 +5,7 @@
     <application
         android:allowBackup="true"
         android:icon="@mipmap/logo_dzkir_13"
+        android:name=".PRThirteenApplication"
         android:label="@string/app_name">
         <activity
             android:name=".MainActivity"
