@@ -18,12 +18,10 @@ import com.noiztezk.pr13.DzkirDetailActivity;
 import com.noiztezk.pr13.MainActivity;
 import com.noiztezk.pr13.R;
 import com.noiztezk.pr13.model.Dzikir;
-import com.noiztezk.pr13.model.Dzkr;
 import com.noiztezk.pr13.utils.Constants;
 
 import org.parceler.Parcels;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**

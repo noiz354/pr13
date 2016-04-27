@@ -4,7 +4,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.noiztezk.pr13.model.Dzkr;
+import com.noiztezk.pr13.model.Dzikir;
 
 import java.util.List;
 
@@ -12,12 +12,12 @@ import java.util.List;
  * Created by SRIN on 7/27/2015.
  */
 public class DzkirPagerAdapter extends FragmentPagerAdapter {
-    List<Dzkr> DzkrRef;
+    List<Dzikir> DzkrRef;
     public DzkirPagerAdapter(FragmentManager fm) {
         super(fm);
     }
 
-    public void setDzkrRef(List<Dzkr> dzkrRef) {
+    public void setDzkrRef(List<Dzikir> dzkrRef) {
         DzkrRef = dzkrRef;
     }
 

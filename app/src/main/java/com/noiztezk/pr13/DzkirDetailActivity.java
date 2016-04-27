@@ -16,18 +16,18 @@ import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.TextView;
 
-import com.noiztezk.pr13.model.Dzkr;
+import com.noiztezk.pr13.model.Dzikir;
 import com.noiztezk.pr13.utils.Constants;
-import com.noiztezk.pr13.utils.FragmentFactory;
 import com.noiztezk.pr13.view.DzkirDetailCounterFragment;
 import com.noiztezk.pr13.view.DzkirPagerAdapter;
 
-import java.util.ArrayList;
+import org.parceler.Parcels;
+
 import java.util.List;
 
 public class DzkirDetailActivity extends AppCompatActivity {
-    Dzkr data;
-    List<Dzkr> datas;
+    Dzikir data;
+    List<Dzikir> datas;
     Switch switch_to;
     TextView counter, detail;
 
@@ -47,8 +47,8 @@ public class DzkirDetailActivity extends AppCompatActivity {
 
     private void grapIntent(){
         Intent intent = getIntent();
-        data = intent.getParcelableExtra(Constants.customObject[0]);
-        datas = intent.getParcelableArrayListExtra(Constants.customObject[3]);
+        data = Parcels.unwrap(intent.getParcelableExtra(Constants.customObject[0]));
+        datas = Parcels.unwrap(intent.getParcelableExtra(Constants.customObject[3]));
         Log.d("MNORMANSYAH", DzkirDetailActivity.class.getSimpleName()+" data received " +data.toString());
     }
 
@@ -82,13 +82,13 @@ public class DzkirDetailActivity extends AppCompatActivity {
         Intent moveToOtherActivity = new Intent(this, MainActivity.class);
         Bundle bndlanimation =
                 ActivityOptions.makeCustomAnimation(this, R.anim.animation, R.anim.animation2).toBundle();
-        moveToOtherActivity.putExtra(Constants.customObject[2], data);
+        moveToOtherActivity.putExtra(Constants.customObject[2], Parcels.wrap(data));
 
         int searchIndex = -1;
         Log.d("MNORMANSYAH", "using contain MNORMANSYAH search " + (searchIndex = datas.indexOf(data)));
         if(searchIndex != -1)
             datas.set(searchIndex, data);
-        moveToOtherActivity.putParcelableArrayListExtra(Constants.customObject[5], (ArrayList<Dzkr>)datas);
+        moveToOtherActivity.putExtra(Constants.customObject[5], Parcels.wrap(datas));
         startActivity(moveToOtherActivity, bndlanimation);
         this.finish();
     }

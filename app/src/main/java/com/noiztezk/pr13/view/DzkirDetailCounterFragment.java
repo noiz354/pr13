@@ -1,7 +1,6 @@
 package com.noiztezk.pr13.view;
 
-import android.app.Activity;
-import android.media.Image;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -11,16 +10,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.noiztezk.pr13.R;
 import com.noiztezk.pr13.interfaces.DzkrCountModel;
-import com.noiztezk.pr13.model.Dzkr;
+import com.noiztezk.pr13.model.Dzikir;
 import com.noiztezk.pr13.model.DzkrCount;
 import com.noiztezk.pr13.utils.Constants;
 
-import org.w3c.dom.Text;
+import org.parceler.Parcels;
 
 import at.markushi.ui.CircleButton;
 
@@ -28,15 +26,15 @@ import at.markushi.ui.CircleButton;
  * Created by Normansyah Putra on 7/26/2015.
  */
 public class DzkirDetailCounterFragment extends Fragment implements DzkrCountModel {
-    Dzkr data;
+    Dzikir data;
     public DzkrCount realdata;
     at.markushi.ui.CircleButton counterButton;
     Button mCurrent;
     TextView arabic;
 
-    public static DzkirDetailCounterFragment newInstance(Class activityName, Dzkr data){
+    public static DzkirDetailCounterFragment newInstance(Class activityName, Dzikir data){
         Bundle arguments = new Bundle();
-        arguments.putParcelable(Constants.customObject[1], data);
+        arguments.putParcelable(Constants.customObject[1], Parcels.wrap(data));
         DzkirDetailCounterFragment fragment = new DzkirDetailCounterFragment();
         fragment.setArguments(arguments);
         return fragment;
@@ -60,7 +58,7 @@ public class DzkirDetailCounterFragment extends Fragment implements DzkrCountMod
 
     private void handleArguments(Bundle arguments)
     {
-        data = (Dzkr) arguments.getParcelable(Constants.customObject[1]);
+        data = Parcels.unwrap(arguments.getParcelable(Constants.customObject[1]));
         Log.d("MNORMANSYAH", "received "+DzkirDetailCounterFragment.class.getSimpleName()+" : "+data);
         realdata = new DzkrCount();
         realdata.dzkrRef = data;
@@ -74,7 +72,7 @@ public class DzkirDetailCounterFragment extends Fragment implements DzkrCountMod
     }
 
     @Override
-    public void onAttach(Activity activity) {
+    public void onAttach(Context activity) {
         super.onAttach(activity);
         // save activity here
     }
@@ -113,7 +111,7 @@ public class DzkirDetailCounterFragment extends Fragment implements DzkrCountMod
             mCurrent.setText(realdata.getCount()+"");
         }
 
-        arabic.setText(realdata.dzkrRef.text);
+        arabic.setText(realdata.dzkrRef.getText());
     }
 
     @Override
@@ -125,7 +123,7 @@ public class DzkirDetailCounterFragment extends Fragment implements DzkrCountMod
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         Log.d("MNORMANSYAH", "before rotate : " + realdata);
-        outState.putParcelable(Constants.customFragmentRotate[0], realdata);
+        outState.putParcelable(Constants.customFragmentRotate[0], Parcels.wrap(realdata));
     }
 
     @Override

@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.Window;
 import android.widget.AbsListView;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -14,16 +13,15 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.noiztezk.pr13.interfaces.MainActivityView;
 import com.noiztezk.pr13.model.Dzikir;
-import com.noiztezk.pr13.model.Dzkr;
 import com.noiztezk.pr13.model.Example;
 import com.noiztezk.pr13.presenters.MainActivityPresenter;
 import com.noiztezk.pr13.presenters.MainActivityPresenterImpl;
 import com.noiztezk.pr13.utils.Constants;
-import com.noiztezk.pr13.utils.JsonHelper;
 import com.noiztezk.pr13.view.DzkirAdapter;
 
+import org.parceler.Parcels;
+
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.List;
@@ -59,8 +57,8 @@ public class MainActivity extends AppCompatActivity implements MainActivityView 
         dzkrs = null;
         if(getIntent() != null){
             if(getIntent().getParcelableExtra(Constants.customObject[2]) != null){
-                data = getIntent().getParcelableExtra(Constants.customObject[2]);
-//                dzkrs = getIntent().getParcelableArrayListExtra(Constants.customObject[5]);
+                data = Parcels.unwrap(getIntent().getParcelableExtra(Constants.customObject[2]));
+                dzkrs = Parcels.unwrap(getIntent().getParcelableExtra(Constants.customObject[5]));
             }
         }
 

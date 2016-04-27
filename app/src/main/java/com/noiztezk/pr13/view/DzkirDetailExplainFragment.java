@@ -8,13 +8,13 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.noiztezk.pr13.R;
-import com.noiztezk.pr13.model.Dzkr;
+import com.noiztezk.pr13.model.Dzikir;
 
 /**
  * Created by SRIN on 7/27/2015.
  */
 public class DzkirDetailExplainFragment extends Fragment {
-    Dzkr data;
+    Dzikir data;
 
     @Nullable
     @Override
@@ -27,7 +27,7 @@ public class DzkirDetailExplainFragment extends Fragment {
         super.onCreate(savedInstanceState);
     }
 
-    public static DzkirDetailExplainFragment newInstance(Dzkr data){
+    public static DzkirDetailExplainFragment newInstance(Dzikir data){
         return new DzkirDetailExplainFragment();
     }
 }
