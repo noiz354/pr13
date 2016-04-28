@@ -79,7 +79,7 @@ public class DzkirDetailActivity extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
         data = ((DzkirDetailCounterFragment)getSupportFragmentManager().findFragmentByTag(Constants.customFragmentTag[0])).realdata.mergeWithRef();
-        Intent moveToOtherActivity = new Intent(this, MainActivity.class);
+        Intent moveToOtherActivity = new Intent(this, MainActivity2.class);
         Bundle bndlanimation =
                 ActivityOptions.makeCustomAnimation(this, R.anim.animation, R.anim.animation2).toBundle();
         moveToOtherActivity.putExtra(Constants.customObject[2], Parcels.wrap(data));
