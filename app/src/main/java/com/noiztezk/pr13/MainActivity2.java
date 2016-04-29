@@ -34,6 +34,7 @@ import butterknife.ButterKnife;
  */
 public class MainActivity2 extends AppCompatActivity {
 
+    public static final String FIRST_TIME = "first_time";
     @Bind(R.id.coor_layout_main_activity2)
     CoordinatorLayout coordinatorLayout;
 
@@ -65,6 +66,12 @@ public class MainActivity2 extends AppCompatActivity {
         ButterKnife.bind(this);
 
         setSupportActionBar(toolbarMainActivity2);
+
+        if(sharedPreferences.getString(FIRST_TIME, "").equals("")){
+            sharedPreferences.edit().putString(FIRST_TIME, getString(R.string.salam)).apply();
+            Snackbar.make(coordinatorLayout, getString(R.string.salam), Snackbar.LENGTH_LONG).show();
+        }
+
 
         try {
             initData();

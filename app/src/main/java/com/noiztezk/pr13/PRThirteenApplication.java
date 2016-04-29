@@ -6,14 +6,12 @@ import android.app.Application;
  * Created by noiz354 on 4/27/16.
  */
 public class PRThirteenApplication extends Application {
-    private NetComponent mNetComponent;
+    private final NetComponent mNetComponent = createComponent();
 
-    @Override
-    public void onCreate() {
-        super.onCreate();
+    protected NetComponent createComponent() {
         // Dagger%COMPONENT_NAME%
         // list of modules that are part of this component need to be created here too
-        mNetComponent = DaggerNetComponent.builder()
+        return DaggerNetComponent.builder()
                 // This also corresponds to the name of your module: %component_name%Module
                 .appModule(new AppModule(this))
                 .netModule(new NetModule())

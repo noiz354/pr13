@@ -1,6 +1,6 @@
 package com.noiztezk.pr13;
 
-import com.noiztezk.pr13.MainActivity;
+import com.noiztezk.pr13.MainActivity2;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,7 +19,7 @@ import static com.checkdroid.crema.EspressoPlus.*;
 public class dzikir13 {
 
     @Rule
-    public final ActivityTestRule<MainActivity> main = new ActivityTestRule<>(MainActivity.class);
+    public final ActivityTestRule<MainActivity2> main = new ActivityTestRule<>(MainActivity2.class);
 
     /**
      * Test for Dzkir-13
