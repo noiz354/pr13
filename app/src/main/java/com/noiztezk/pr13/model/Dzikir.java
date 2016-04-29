@@ -9,6 +9,9 @@ import com.google.gson.annotations.SerializedName;
 
 import org.parceler.Parcel;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Parcel
 @Generated("org.jsonschema2pojo")
 public class Dzikir {
@@ -22,6 +25,12 @@ public class Dzikir {
     @SerializedName("count")
     @Expose
     String count;
+    @SerializedName("name")
+    @Expose
+    private String name;
+    @SerializedName("read")
+    @Expose
+    private List<String> read = new ArrayList<>();
 
     /**
      *

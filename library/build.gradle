@@ -15,8 +15,8 @@ repositories {
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 22
-    buildToolsVersion "19.1"
+    compileSdkVersion 23
+    buildToolsVersion "23.0.2"
     defaultConfig {
         versionName = 1
         versionCode = 2

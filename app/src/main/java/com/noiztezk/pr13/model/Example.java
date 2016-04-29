@@ -12,18 +12,19 @@ import com.google.gson.annotations.SerializedName;
 @Generated("org.jsonschema2pojo")
 public class Example {
 
+
     @SerializedName("version")
     @Expose
-    private String version;
+    String version;
     @SerializedName("version_created")
     @Expose
-    private String versionCreated;
+    List<String> versionCreated = new ArrayList<>();
     @SerializedName("created_by")
     @Expose
-    private String createdBy;
+    String createdBy;
     @SerializedName("dzkir")
     @Expose
-    private List<Dzikir> dzkir = new ArrayList<Dzikir>();
+    List<Dzikir> dzkir = new ArrayList<Dzikir>();
 
     /**
      *
@@ -43,21 +44,11 @@ public class Example {
         this.version = version;
     }
 
-    /**
-     *
-     * @return
-     * The versionCreated
-     */
-    public String getVersionCreated() {
+    public List<String> getVersionCreated() {
         return versionCreated;
     }
 
-    /**
-     *
-     * @param versionCreated
-     * The version_created
-     */
-    public void setVersionCreated(String versionCreated) {
+    public void setVersionCreated(List<String> versionCreated) {
         this.versionCreated = versionCreated;
     }
 
