@@ -5,7 +5,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.1.0-rc1'
+        classpath 'com.android.tools.build:gradle:2.1.0'
 
         // This will make Dagger 2 generated class as legitimated class
         classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'

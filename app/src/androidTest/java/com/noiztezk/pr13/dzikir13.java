@@ -60,7 +60,7 @@ public class dzikir13 {
         onView(withId(R.id.counterButton)).perform(click());
         onView(withId(R.id.counterButton)).perform(click());
         onView(withId(R.id.counterButton)).perform(click());
-        takeScreenshot(true);
+        takeScreenShot();
         onView(withXPath("/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.View/android.widget.FrameLayout[1]/android.widget.RelativeLayout/android.widget.ListView/android.widget.RelativeLayout[1]/android.widget.RelativeLayout")).check(matches(isDisplayed()));
         onView(withXPath("/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.View/android.widget.FrameLayout[1]/android.widget.RelativeLayout/android.widget.ListView/android.widget.RelativeLayout[1]/android.widget.RelativeLayout")).check(matches(isEnabled()));
     }
