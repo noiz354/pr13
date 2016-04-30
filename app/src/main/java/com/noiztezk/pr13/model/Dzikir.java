@@ -27,10 +27,10 @@ public class Dzikir {
     String count;
     @SerializedName("name")
     @Expose
-    private String name;
+    String name;
     @SerializedName("read")
     @Expose
-    private List<String> read = new ArrayList<>();
+    List<String> read = new ArrayList<>();
 
     /**
      *

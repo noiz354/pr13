@@ -33,6 +33,7 @@ android {
 final GOOGLE_SUPPORT_LIBRARY_VERSION = '23.3.0'
 final BUTTERKNIFE_VERSION = '7.0.1'
 final DAGGER_VERSION = '2.2'
+final EXPRESSO_VERSION = '2.2.2'
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
@@ -63,8 +64,8 @@ dependencies {
     testCompile 'org.hamcrest:hamcrest-library:1.3'
     // more stuff, e.g., Mockito
     androidTestCompile 'com.android.support.test:runner:0.5'
-    androidTestCompile 'com.android.support.test:rules:0.3'
-    androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.2'
+    androidTestCompile 'com.android.support.test:rules:0.5'
+    androidTestCompile "com.android.support.test.espresso:espresso-core:2.2.2"
     androidTestCompile "com.android.support:support-annotations:$GOOGLE_SUPPORT_LIBRARY_VERSION"
     //[END] This is for testing
     compile "com.android.support:design:$GOOGLE_SUPPORT_LIBRARY_VERSION"

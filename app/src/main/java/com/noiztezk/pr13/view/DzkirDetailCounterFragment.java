@@ -67,7 +67,11 @@ public class DzkirDetailCounterFragment extends Fragment implements DzkrCountMod
 
     private void handleSavedInstanceState(Bundle savedInstanceState){
         if(savedInstanceState != null){
-            realdata  = savedInstanceState.getParcelable(Constants.customFragmentRotate[0]);
+            realdata  = Parcels.unwrap(
+                    savedInstanceState.getParcelable(
+                            Constants.customFragmentRotate[0]
+                    )
+            );
         }
     }
 
