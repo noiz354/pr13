@@ -30,7 +30,7 @@ android {
 
 }
 
-final GOOGLE_SUPPORT_LIBRARY_VERSION = '23.3.0'
+final GOOGLE_SUPPORT_LIBRARY_VERSION = '23.1.1'
 final BUTTERKNIFE_VERSION = '7.0.1'
 final DAGGER_VERSION = '2.2'
 final EXPRESSO_VERSION = '2.2.2'
@@ -65,9 +65,12 @@ dependencies {
     // more stuff, e.g., Mockito
     androidTestCompile 'com.android.support.test:runner:0.5'
     androidTestCompile 'com.android.support.test:rules:0.5'
-    androidTestCompile "com.android.support.test.espresso:espresso-core:2.2.2"
+    androidTestCompile "com.android.support.test.espresso:espresso-core:${EXPRESSO_VERSION}"
+    // Espresso-contrib for DatePicker, RecyclerView, Drawer actions, Accessibility checks, CountingIdlingResource
+    androidTestCompile "com.android.support.test.espresso:espresso-contrib:${EXPRESSO_VERSION}"
     androidTestCompile "com.android.support:support-annotations:$GOOGLE_SUPPORT_LIBRARY_VERSION"
     //[END] This is for testing
     compile "com.android.support:design:$GOOGLE_SUPPORT_LIBRARY_VERSION"
     androidTestCompile 'org.mockito:mockito-core:1.10.19'
+    compile "com.android.support:recyclerview-v7:$GOOGLE_SUPPORT_LIBRARY_VERSION"
 }

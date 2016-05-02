@@ -64,6 +64,7 @@ public class MainActivityTest {
     }
 
     public static final String LAST_ITEM = "ُبْحَانَ اللّهِ ، والْحَمْدُللّهِ ، وَ لا اِلهَ اِلَّا اللّهُ ، وَ اللّهُ اَكْبَرُ";
+
     /**
      * ini pengganti dari {@link android.test.ActivityInstrumentationTestCase2}
      * rules adalah interceptor yang dieksekusi dari setiap metode dan dijalankan sebelum setup code {@link Before @Before }

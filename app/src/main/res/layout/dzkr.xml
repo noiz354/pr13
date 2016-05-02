@@ -19,7 +19,7 @@
                 android:id="@+id/read"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                app:srcCompat="@drawable/morning"
+                android:src="@mipmap/morning"
                 android:scaleType="centerInside"
                 />
             <TextView

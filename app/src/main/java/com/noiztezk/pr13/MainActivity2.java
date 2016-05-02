@@ -1,6 +1,7 @@
 package com.noiztezk.pr13;
 
 import android.app.SearchManager;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.PersistableBundle;
@@ -86,8 +87,8 @@ public class MainActivity2 extends AppCompatActivity {
 
     }
 
-    private void initData() throws IOException{
-        InputStream is = getAssets().open(DEF_PR13_JSON);
+    public static List<Dzikir> getData(Context context, Gson gson) throws IOException{
+        InputStream is = context.getAssets().open(DEF_PR13_JSON);
         int size = is.available();
         byte[] buffer = new byte[size];
         is.read(buffer);
@@ -95,7 +96,11 @@ public class MainActivity2 extends AppCompatActivity {
         String bufferString = new String(buffer);
 
         Example example = gson.fromJson(bufferString, Example.class);
-        dzkrs = example.getDzkir();
+        return example.getDzkir();
+    }
+
+    private void initData() throws IOException{
+        dzkrs = getData(this, gson);
     }
 
     private void setupRecyclerView(){
