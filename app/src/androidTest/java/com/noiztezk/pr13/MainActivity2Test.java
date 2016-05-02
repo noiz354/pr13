@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.espresso.NoMatchingViewException;
+import android.support.test.espresso.contrib.RecyclerViewActions;
 import android.support.test.espresso.matcher.ViewMatchers;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
@@ -24,8 +25,10 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.hasDescendant;
+import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.junit.Assert.fail;
 
@@ -42,6 +45,8 @@ public class MainActivity2Test {
     @Inject
     Gson gson;
 
+    List<Dzikir> readjsonDzikir;
+
     @Before
     public void setUp(){
         Instrumentation instrumentation = InstrumentationRegistry.getInstrumentation();
@@ -49,6 +54,12 @@ public class MainActivity2Test {
                 = (PRThirteenApplication) instrumentation.getTargetContext().getApplicationContext();
         TestComponent component = (TestComponent) app.getmNetComponent();
         component.inject(this);
+
+        try {
+            readjsonDzikir = MainActivity2.getData(InstrumentationRegistry.getContext(),gson);
+        }catch(IOException ioe){
+            ioe.printStackTrace();
+        }
     }
 
     /**
@@ -66,13 +77,9 @@ public class MainActivity2Test {
     public void performCheckArabicContent(){
         mActivityRule.launchActivity(new Intent());
 
-        List<Dzikir> dzikirs = null;
-
-        try {
-            dzikirs = MainActivity2.getData(InstrumentationRegistry.getContext(),gson);
             RecyclerViewInteraction.
-                    <Dzikir>onRecyclerView(ViewMatchers.withId(R.id.recylerview_main_activity2))
-                    .withItems(dzikirs)
+                    <Dzikir>onRecyclerView(withId(R.id.recylerview_main_activity2))
+                    .withItems(readjsonDzikir)
                     .check(new RecyclerViewInteraction.ItemViewAssertion<Dzikir>() {
                         @Override
                         public void check(Dzikir item, View view, NoMatchingViewException e) {
@@ -80,11 +87,17 @@ public class MainActivity2Test {
                                     .check(view, e);
                         }
                     });
-        }catch(IOException ioe){
-            ioe.printStackTrace();
-            fail();
-        }
+
+    }
+
+    @Test
+    public void performClickAtRecyclerView(){
+        mActivityRule.launchActivity(new Intent());
+
+        onView(withId(R.id.recylerview_main_activity2)).perform(
+                RecyclerViewActions.actionOnItemAtPosition(12, TestUtils.clickChildViewWithId(R.id.text)));
 
 
+        onView(withId(R.id.arabic)).check(matches(withText(readjsonDzikir.get(12).getText())));
     }
 }
