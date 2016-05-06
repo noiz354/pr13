@@ -7,4 +7,15 @@
     <string name="title_activity_dzkir_detail">DzkirDetailActivity</string>
 
     <string name="salam">"Assalamualaikum ?"</string>
+    <string-array name="audio_format">
+        <item>mp3</item>
+        <item>m4a</item>
+    </string-array>
+
+    <string-array name="unknown_user">
+        <item>0_tidak diketahui</item>
+        <item>1_99</item>
+        <item>2_test@email.com</item>
+        <item>3_device id</item>
+    </string-array>
 </resources>

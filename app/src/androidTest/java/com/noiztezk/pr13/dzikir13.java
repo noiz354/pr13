@@ -102,6 +102,7 @@ public class dzikir13 {
 
         onView(withId(R.id.counterButton)).perform(click());
         onView(withId(R.id.counterButton)).perform(click());
+
         onView(withId(R.id.counterButton)).perform(click());
         onView(withId(R.id.counterButton)).perform(click());
         onView(withId(R.id.counterButton)).perform(click());

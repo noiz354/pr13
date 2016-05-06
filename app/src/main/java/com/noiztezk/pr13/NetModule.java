@@ -4,9 +4,12 @@ import android.app.Application;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
+import com.google.gson.ExclusionStrategy;
+import com.google.gson.FieldAttributes;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.raizlabs.android.dbflow.structure.ModelAdapter;
 
 import javax.inject.Singleton;
 
@@ -45,6 +48,18 @@ public class NetModule {
     @Singleton
     Gson provideGson() {
         GsonBuilder gsonBuilder = new GsonBuilder();
+        gsonBuilder.excludeFieldsWithoutExposeAnnotation();
+//        gsonBuilder.setExclusionStrategies(new ExclusionStrategy() {
+//            @Override
+//            public boolean shouldSkipField(FieldAttributes f) {
+//                return f.getDeclaredClass().equals(ModelAdapter.class);
+//            }
+//
+//            @Override
+//            public boolean shouldSkipClass(Class<?> clazz) {
+//                return false;
+//            }
+//        });
         gsonBuilder.setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES);
         return gsonBuilder.create();
     }
