@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.noiztezk.pr13.MainActivity2;
 import com.noiztezk.pr13.R;
 import com.noiztezk.pr13.interfaces.DzkrCountModel;
 import com.noiztezk.pr13.model.Dzikir;
@@ -21,15 +22,23 @@ import com.noiztezk.pr13.utils.Constants;
 import org.parceler.Parcels;
 
 import at.markushi.ui.CircleButton;
+import butterknife.Bind;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Created by Normansyah Putra on 7/26/2015.
  */
 public class DzkirDetailCounterFragment extends Fragment implements DzkrCountModel {
     Dzikir data;
+    com.noiztezk.pr13.db.Dzikir dataDb;
     public DzkrCount realdata;
+
+    @Bind(R.id.counterButton)
     at.markushi.ui.CircleButton counterButton;
+    @Bind(R.id.btnNumNotif)
     Button mCurrent;
+    @Bind(R.id.arabic)
     TextView arabic;
 
     public static DzkirDetailCounterFragment newInstance(Class activityName, Dzikir data){
@@ -44,11 +53,9 @@ public class DzkirDetailCounterFragment extends Fragment implements DzkrCountMod
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
         // handle fragment arguments
         Bundle arguments = getArguments();
-        if(arguments != null)
-        {
+        if(arguments != null){
             handleArguments(arguments);
         }
 
@@ -59,6 +66,7 @@ public class DzkirDetailCounterFragment extends Fragment implements DzkrCountMod
     private void handleArguments(Bundle arguments)
     {
         data = Parcels.unwrap(arguments.getParcelable(Constants.customObject[1]));
+        dataDb = MainActivity2.fromDzikirNameDb(data.getName());
         Log.d("MNORMANSYAH", "received "+DzkirDetailCounterFragment.class.getSimpleName()+" : "+data);
         realdata = new DzkrCount();
         realdata.dzkrRef = data;
@@ -75,36 +83,18 @@ public class DzkirDetailCounterFragment extends Fragment implements DzkrCountMod
         }
     }
 
-    @Override
-    public void onAttach(Context activity) {
-        super.onAttach(activity);
-        // save activity here
-    }
-
-    @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-    }
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View base = inflater.inflate(R.layout.dzkir_counter_layout, null);
-        initUI(base);
+        ButterKnife.bind(this, base);
         return base;
-    }
-
-    private void initUI(@NonNull View base){
-        counterButton = (CircleButton) base.findViewById(R.id.counterButton);
-        counterButton.setOnClickListener(new CounterButtonOnClick());
-        mCurrent = (Button)base.findViewById(R.id.btnNumNotif);
-        realdata.setModel(this);
-        arabic = (TextView) base.findViewById(R.id.arabic);
     }
 
     @Override
     public void onResume() {
         super.onResume();
+        realdata.setModel(this);
         initData();
     }
 
@@ -121,6 +111,7 @@ public class DzkirDetailCounterFragment extends Fragment implements DzkrCountMod
     @Override
     public void onPause() {
         super.onPause();
+        realdata.setModel(null);
     }
 
     @Override
@@ -130,17 +121,9 @@ public class DzkirDetailCounterFragment extends Fragment implements DzkrCountMod
         outState.putParcelable(Constants.customFragmentRotate[0], Parcels.wrap(realdata));
     }
 
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        // destroy activity here
-    }
-
-    private class CounterButtonOnClick implements View.OnClickListener{
-        @Override
-        public void onClick(View view) {
-            realdata.incrementCount();
-        }
+    @OnClick(R.id.counterButton)
+    public void counterButtonClick(){
+        realdata.incrementCount();
     }
 
     @Override

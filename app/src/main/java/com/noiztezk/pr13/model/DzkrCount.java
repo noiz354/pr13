@@ -23,9 +23,9 @@ import java.util.Date;
 public class DzkrCount{
     DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
     int count; // count by user
-    ArrayList<Date> curDate;// TODO currently not parcelable
-    ArrayList<String> visCurDate; // TODO currently not parcelable
-    double latitude, langitude; // TODO currently not use
+    ArrayList<Date> curDate;
+    ArrayList<String> visCurDate;
+    double latitude, langitude;
     public Dzikir dzkrRef;
 
     public DzkrCount(){
