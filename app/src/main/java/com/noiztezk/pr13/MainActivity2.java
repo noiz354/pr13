@@ -30,6 +30,7 @@ import com.raizlabs.android.dbflow.sql.language.Select;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -71,7 +72,6 @@ public class MainActivity2 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
 
-
         ((PRThirteenApplication)getApplication()).getmNetComponent().inject(this);
 
         ButterKnife.bind(this);
@@ -86,21 +86,24 @@ public class MainActivity2 extends AppCompatActivity {
             insertKnownAudioType(audioFormat);
             insertUnknownUser(unidentifiedPerson);
             Snackbar.make(coordinatorLayout, getString(R.string.salam), Snackbar.LENGTH_LONG).show();
+
+            try {
+                initData();
+                saveDzikirJsonToDb(dzkrs);
+            }catch (IOException ioe){
+                Snackbar.make(coordinatorLayout, ioe.getMessage(), Snackbar.LENGTH_LONG).show();
+            }
         }else{
             person = new Select().from(Person.class).where(
                     Condition.column(Person_Table.name.getNameAlias())
                             .eq(getUnIdentifiedPerson(unidentifiedPerson).getName()))
                     .querySingle();
+            List<com.noiztezk.pr13.db.Dzikir> dbs = new Select().from(
+                    com.noiztezk.pr13.db.Dzikir.class
+            ).queryList();
+            dzkrs = fromDb(dbs);
         }
-
-        try {
-            initData();
-            saveDzikirJsonToDb(dzkrs);
-            setupRecyclerView();
-        }catch (IOException ioe){
-            Snackbar.make(coordinatorLayout, ioe.getMessage(), Snackbar.LENGTH_LONG).show();
-        }
-
+        setupRecyclerView();
     }
 
     public static List<Dzikir> getData(Context context, Gson gson) throws IOException{
@@ -189,6 +192,25 @@ public class MainActivity2 extends AppCompatActivity {
         person.save();
     }
 
+    private synchronized List<Dzikir> fromDb(List<com.noiztezk.pr13.db.Dzikir> dzikirLis){
+        List<Dzikir> dzikirs = new ArrayList<>();
+        for (com.noiztezk.pr13.db.Dzikir dz : dzikirLis){
+            Dzikir dzikir = new Dzikir();
+            dzikir.setName(dz.getDzikirName());
+            dzikir.setText(dz.getArabicDzikirText());
+            dzikir.setCount(Integer.toString(dz.getCountDzikir()));
+            String[] split = dz.getRead().split(",");
+            List<String> result = new ArrayList<>();
+            for (String test : split){
+                result.add(test);
+            }
+            dzikir.setRead(result);
+
+            dzikirs.add(dzikir);
+        }
+        return dzikirs;
+    }
+
     private synchronized void saveDzikirJsonToDb(List<Dzikir> dzikirs){
         for ( Dzikir dzikir : dzikirs ){
             com.noiztezk.pr13.db.Dzikir dz
@@ -196,6 +218,17 @@ public class MainActivity2 extends AppCompatActivity {
             dz.setDzikirName(dzikir.getName());
             dz.setArabicDzikirText(dzikir.getText());
             dz.setCountDzikir(Integer.parseInt(dzikir.getCount()));
+            String temp = "";
+            int end = dzikir.getRead().size()-1, count =0;
+            for (String read : dzikir.getRead()){
+                if(count == end){
+                    temp += read;
+                }else{
+                    temp+=read+",";
+                }
+                count++;
+            }
+            dz.setRead(temp);
             dz.save();
         }
     }

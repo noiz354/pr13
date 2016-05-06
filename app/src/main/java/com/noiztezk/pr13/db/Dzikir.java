@@ -28,6 +28,17 @@ public class Dzikir extends BaseModel {
     @Column
     long reminderTime;
 
+    @Column
+    String read;
+
+    public String getRead() {
+        return read;
+    }
+
+    public void setRead(String read) {
+        this.read = read;
+    }
+
     public Long getId() {
         return id;
     }

@@ -28,19 +28,17 @@
                 android:layout_height="wrap_content"
                 android:text="coba disini kalau kepanjangan hasilnya seperti apa?"
                 android:maxLength="30"
-                />
+                android:layout_gravity="center"
+                android:layout_marginLeft="10dp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="New Text"
                 android:id="@+id/count"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginRight="4dp"
                 android:background="@drawable/ripple_test"
-                android:layout_marginTop="2dp" />
+                android:layout_marginLeft="10dp"
+                android:layout_gravity="center"/>
 
         </LinearLayout>
         <!--android:background="@drawable/listview_item_shadow" -->

@@ -18,4 +18,11 @@
         <item>2_test@email.com</item>
         <item>3_device id</item>
     </string-array>
+
+    <string-array name="read">
+        <item>morning</item>
+        <item>midday</item>
+        <item>afternoon</item>
+        <item>night</item>
+    </string-array>
 </resources>
