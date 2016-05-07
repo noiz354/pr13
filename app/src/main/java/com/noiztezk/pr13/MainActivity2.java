@@ -126,7 +126,7 @@ public class MainActivity2 extends AppCompatActivity {
 
     private void setupRecyclerView(){
         recyclerViewMainActivity2.setLayoutManager(new LinearLayoutManager(recyclerViewMainActivity2.getContext()));
-        recyclerViewMainActivity2.setAdapter(new DzikirAdapter2(dzkrs));
+        recyclerViewMainActivity2.setAdapter(new DzikirAdapter2(person, dzkrs));
     }
 
     @Override

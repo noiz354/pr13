@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.noiztezk.pr13.DzkirDetailActivity;
 import com.noiztezk.pr13.MainActivity2;
 import com.noiztezk.pr13.R;
+import com.noiztezk.pr13.db.Person;
 import com.noiztezk.pr13.model.Dzikir;
 import com.noiztezk.pr13.utils.Constants;
 
@@ -36,9 +37,11 @@ import butterknife.OnClick;
  */
 public class DzikirAdapter2 extends RecyclerView.Adapter<DzikirAdapter2.ViewHolder> {
 
+    Person person;
     List<Dzikir> dzikirs;
 
-    public DzikirAdapter2(List<Dzikir> dzikirs){
+    public DzikirAdapter2(Person person, List<Dzikir> dzikirs){
+        this.person = person;
         this.dzikirs = dzikirs;
     }
 
@@ -128,9 +131,9 @@ public class DzikirAdapter2 extends RecyclerView.Adapter<DzikirAdapter2.ViewHold
             Intent moveToAnotherActivity = new Intent(mContext, DzkirDetailActivity.class);
             Bundle bndlanimation =
                     ActivityOptions.makeCustomAnimation(mContext, R.anim.animation, R.anim.animation2).toBundle();
-            moveToAnotherActivity.putExtra(Constants.customObject[0], Parcels.wrap(dzikir));
-            moveToAnotherActivity.putExtra(Constants.customObject[3], Parcels.wrap(dzikirs));
-            moveToAnotherActivity.putExtra(Constants.customObject[4], position);
+            moveToAnotherActivity.putExtra(Constants.STATIC_VALUE.DATA_DZIKIR, Parcels.wrap(dzikir));
+            moveToAnotherActivity.putExtra(Constants.STATIC_VALUE.DATA_PERSON, Parcels.wrap(person));
+
             mContext.startActivity(moveToAnotherActivity, bndlanimation);
 
             if(mContext != null && mContext instanceof MainActivity2)

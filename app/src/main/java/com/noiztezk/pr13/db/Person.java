@@ -5,10 +5,13 @@ import com.raizlabs.android.dbflow.annotation.PrimaryKey;
 import com.raizlabs.android.dbflow.annotation.Table;
 import com.raizlabs.android.dbflow.structure.BaseModel;
 
+import org.parceler.Parcel;
+
 /**
  * Created by hafizhhabiby on 5/5/16.
  */
 @Table(database = DzikirDatabase.class)
+@Parcel(analyze={Person.class})
 public class Person  extends BaseModel {
 
     @Column
