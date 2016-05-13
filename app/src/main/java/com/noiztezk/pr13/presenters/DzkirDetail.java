@@ -2,6 +2,8 @@ package com.noiztezk.pr13.presenters;
 
 import android.os.Bundle;
 
+import com.noiztezk.pr13.model.Dzikir;
+
 /**
  * Created by noiz354 on 5/13/16.
  */
@@ -17,4 +19,5 @@ public interface DzkirDetail extends Common{
     void printAllQuery();
     void saveDataInstanceState(Bundle outState);
     void incrementCount();
+    Dzikir getDzikir();
 }

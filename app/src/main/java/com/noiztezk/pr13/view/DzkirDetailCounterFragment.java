@@ -14,11 +14,11 @@ import android.widget.TextView;
 
 import com.noiztezk.pr13.MainActivity2;
 import com.noiztezk.pr13.R;
-import com.noiztezk.pr13.db.Dzikir_Table;
-import com.noiztezk.pr13.db.Person;
-import com.noiztezk.pr13.db.Person_Table;
-import com.noiztezk.pr13.db.ReadDzikir;
-import com.noiztezk.pr13.db.ReadDzikir_Table;
+import com.noiztezk.db.Dzikir_Table;
+import com.noiztezk.db.Person;
+import com.noiztezk.db.Person_Table;
+import com.noiztezk.db.ReadDzikir;
+import com.noiztezk.db.ReadDzikir_Table;
 import com.noiztezk.pr13.model.Dzikir;
 import com.noiztezk.pr13.presenters.DzkirDetail;
 import com.noiztezk.pr13.presenters.DzkirDetailImpl;
@@ -104,6 +104,11 @@ public class DzkirDetailCounterFragment extends Fragment implements DzkirDetailV
     @Override
     public Context getViewContext() {
         return getActivity();
+    }
+
+    @Override
+    public Dzikir getDzikir() {
+        return dzkirDetail.getDzikir();
     }
 
     @Override

@@ -1,4 +1,4 @@
-package com.noiztezk.pr13.db;
+package com.noiztezk.db;
 
 import com.raizlabs.android.dbflow.annotation.Database;
 

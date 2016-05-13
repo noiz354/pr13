@@ -43,6 +43,8 @@ final GOOGLE_SUPPORT_LIBRARY_VERSION = '23.1.1'
 final BUTTERKNIFE_VERSION = '7.0.1'
 final DAGGER_VERSION = '2.2'
 final EXPRESSO_VERSION = '2.2.2'
+final mockitoVersion = '1.10.19'
+final powerMockito = '1.6.2'
 
 def dbflow_version = "3.0.0-beta6"
 // or dbflow_version = "develop-SNAPSHOT" for grabbing latest dependency in your project on the develop branch
@@ -92,4 +94,8 @@ dependencies {
     compile "com.github.Raizlabs.DBFlow:dbflow-core:${dbflow_version}"
     compile "com.github.Raizlabs.DBFlow:dbflow:${dbflow_version}"
     compile 'net.danlew:android.joda:2.9.3'
+
+    testCompile "org.mockito:mockito-all:$mockitoVersion"
+    testCompile "org.powermock:powermock-module-junit4:$powerMockito"
+    testCompile "org.powermock:powermock-api-mockito:$powerMockito"
 }

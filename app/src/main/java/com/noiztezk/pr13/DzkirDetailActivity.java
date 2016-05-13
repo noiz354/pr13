@@ -16,7 +16,7 @@ import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.TextView;
 
-import com.noiztezk.pr13.db.Person;
+import com.noiztezk.db.Person;
 import com.noiztezk.pr13.model.Dzikir;
 import com.noiztezk.pr13.utils.Constants;
 import com.noiztezk.pr13.view.DzkirDetailCounterFragment;
@@ -81,7 +81,8 @@ public class DzkirDetailActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        data = ((DzkirDetailCounterFragment)getSupportFragmentManager().findFragmentByTag(DzkirDetailCounterFragment.TAG)).realdata.mergeWithRef();
+        DzkirDetailCounterFragment fragment = (DzkirDetailCounterFragment)getSupportFragmentManager().findFragmentByTag(DzkirDetailCounterFragment.TAG);
+        data = fragment.getDzikir();
         Intent moveToOtherActivity = new Intent(this, MainActivity2.class);
         Bundle bndlanimation =
                 ActivityOptions.makeCustomAnimation(this, R.anim.animation, R.anim.animation2).toBundle();

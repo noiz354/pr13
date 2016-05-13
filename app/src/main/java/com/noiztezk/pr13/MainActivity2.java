@@ -19,11 +19,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.google.gson.Gson;
-import com.noiztezk.pr13.db.AudioType;
-import com.noiztezk.pr13.db.AudioType_Table;
-import com.noiztezk.pr13.db.Dzikir_Table;
-import com.noiztezk.pr13.db.Person;
-import com.noiztezk.pr13.db.Person_Table;
+import com.noiztezk.db.AudioType;
+import com.noiztezk.db.Dzikir_Table;
+import com.noiztezk.db.Person;
+import com.noiztezk.db.Person_Table;
 import com.noiztezk.pr13.model.Dzikir;
 import com.noiztezk.pr13.model.Example;
 import com.noiztezk.pr13.view.DzikirAdapter2;
@@ -100,8 +99,8 @@ public class MainActivity2 extends AppCompatActivity {
                     Condition.column(Person_Table.name.getNameAlias())
                             .eq(getUnIdentifiedPerson(unidentifiedPerson).getName()))
                     .querySingle();
-            List<com.noiztezk.pr13.db.Dzikir> dbs = new Select().from(
-                    com.noiztezk.pr13.db.Dzikir.class
+            List<com.noiztezk.db.Dzikir> dbs = new Select().from(
+                    com.noiztezk.db.Dzikir.class
             ).queryList();
             dzkrs = fromDb(dbs);
         }
@@ -194,9 +193,9 @@ public class MainActivity2 extends AppCompatActivity {
         person.save();
     }
 
-    private synchronized List<Dzikir> fromDb(List<com.noiztezk.pr13.db.Dzikir> dzikirLis){
+    private synchronized List<Dzikir> fromDb(List<com.noiztezk.db.Dzikir> dzikirLis){
         List<Dzikir> dzikirs = new ArrayList<>();
-        for (com.noiztezk.pr13.db.Dzikir dz : dzikirLis){
+        for (com.noiztezk.db.Dzikir dz : dzikirLis){
             Dzikir dzikir = fromDzikirDb(dz);
 
             dzikirs.add(dzikir);
@@ -206,24 +205,24 @@ public class MainActivity2 extends AppCompatActivity {
 
     @Nullable
     public static Dzikir fromDzikirName(String name){
-        com.noiztezk.pr13.db.Dzikir dzikir
-                = new Select().from(com.noiztezk.pr13.db.Dzikir.class).where(
+        com.noiztezk.db.Dzikir dzikir
+                = new Select().from(com.noiztezk.db.Dzikir.class).where(
                     Condition.column(Dzikir_Table.dzikirName.getNameAlias()).eq(name)
                 ).querySingle();
         return dzikir == null ? null : fromDzikirDb(dzikir);
     }
 
     @Nullable
-    public static com.noiztezk.pr13.db.Dzikir fromDzikirNameDb(String name){
-        com.noiztezk.pr13.db.Dzikir dzikir
-                = new Select().from(com.noiztezk.pr13.db.Dzikir.class).where(
+    public static com.noiztezk.db.Dzikir fromDzikirNameDb(String name){
+        com.noiztezk.db.Dzikir dzikir
+                = new Select().from(com.noiztezk.db.Dzikir.class).where(
                 Condition.column(Dzikir_Table.dzikirName.getNameAlias()).eq(name)
         ).querySingle();
         return dzikir;
     }
 
     @NonNull
-    public static Dzikir fromDzikirDb(com.noiztezk.pr13.db.Dzikir dz) {
+    public static Dzikir fromDzikirDb(com.noiztezk.db.Dzikir dz) {
         Dzikir dzikir = new Dzikir();
         dzikir.setName(dz.getDzikirName());
         dzikir.setText(dz.getArabicDzikirText());
@@ -239,8 +238,8 @@ public class MainActivity2 extends AppCompatActivity {
 
     private synchronized void saveDzikirJsonToDb(List<Dzikir> dzikirs){
         for ( Dzikir dzikir : dzikirs ){
-            com.noiztezk.pr13.db.Dzikir dz
-                    = new com.noiztezk.pr13.db.Dzikir();
+            com.noiztezk.db.Dzikir dz
+                    = new com.noiztezk.db.Dzikir();
             dz.setDzikirName(dzikir.getName());
             dz.setArabicDzikirText(dzikir.getText());
             dz.setCountDzikir(Integer.parseInt(dzikir.getCount()));

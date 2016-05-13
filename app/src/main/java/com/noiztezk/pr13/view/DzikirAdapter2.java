@@ -17,7 +17,7 @@ import android.widget.TextView;
 import com.noiztezk.pr13.DzkirDetailActivity;
 import com.noiztezk.pr13.MainActivity2;
 import com.noiztezk.pr13.R;
-import com.noiztezk.pr13.db.Person;
+import com.noiztezk.db.Person;
 import com.noiztezk.pr13.model.Dzikir;
 import com.noiztezk.pr13.utils.Constants;
 

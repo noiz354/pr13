@@ -1,5 +1,6 @@
-package com.noiztezk.pr13.db;
+package com.noiztezk.db;
 
+import com.noiztezk.db.DzikirDatabase;
 import com.raizlabs.android.dbflow.annotation.Column;
 import com.raizlabs.android.dbflow.annotation.ForeignKey;
 import com.raizlabs.android.dbflow.annotation.ForeignKeyReference;
@@ -7,10 +8,13 @@ import com.raizlabs.android.dbflow.annotation.PrimaryKey;
 import com.raizlabs.android.dbflow.annotation.Table;
 import com.raizlabs.android.dbflow.structure.BaseModel;
 
+import org.parceler.Parcel;
+
 /**
  * Created by hafizhhabiby on 5/5/16.
  */
 @Table(database = DzikirDatabase.class)
+@Parcel(analyze={Place.class})
 public class Place extends BaseModel {
     @Column
     @PrimaryKey(

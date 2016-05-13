@@ -1,5 +1,6 @@
-package com.noiztezk.pr13.db;
+package com.noiztezk.db;
 
+import com.noiztezk.db.DzikirDatabase;
 import com.raizlabs.android.dbflow.annotation.Column;
 import com.raizlabs.android.dbflow.annotation.PrimaryKey;
 import com.raizlabs.android.dbflow.annotation.Table;
