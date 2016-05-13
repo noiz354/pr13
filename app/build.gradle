@@ -39,6 +39,10 @@ final BUTTERKNIFE_VERSION = '7.0.1'
 final DAGGER_VERSION = '2.2'
 final EXPRESSO_VERSION = '2.2.2'
 
+def dbflow_version = "3.0.0-beta6"
+// or dbflow_version = "develop-SNAPSHOT" for grabbing latest dependency in your project on the develop branch
+// or 10-digit short-hash of a specific commit. (Useful for bugs fixed in develop, but not in a release yet)
+
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     //[START] Dagger dependency
@@ -77,4 +81,10 @@ dependencies {
     compile "com.android.support:design:$GOOGLE_SUPPORT_LIBRARY_VERSION"
     androidTestCompile 'org.mockito:mockito-core:1.10.19'
     compile "com.android.support:recyclerview-v7:$GOOGLE_SUPPORT_LIBRARY_VERSION"
+
+    apt "com.github.Raizlabs.DBFlow:dbflow-processor:${dbflow_version}"
+    // use kapt for kotlin apt
+    compile "com.github.Raizlabs.DBFlow:dbflow-core:${dbflow_version}"
+    compile "com.github.Raizlabs.DBFlow:dbflow:${dbflow_version}"
+    compile 'net.danlew:android.joda:2.9.3'
 }

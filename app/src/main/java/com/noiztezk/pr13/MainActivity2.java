@@ -4,7 +4,7 @@ import android.app.SearchManager;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.PersistableBundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CoordinatorLayout;
@@ -17,15 +17,22 @@ import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.noiztezk.pr13.db.AudioType;
+import com.noiztezk.pr13.db.AudioType_Table;
+import com.noiztezk.pr13.db.Dzikir_Table;
+import com.noiztezk.pr13.db.Person;
+import com.noiztezk.pr13.db.Person_Table;
 import com.noiztezk.pr13.model.Dzikir;
 import com.noiztezk.pr13.model.Example;
 import com.noiztezk.pr13.view.DzikirAdapter2;
+import com.raizlabs.android.dbflow.sql.language.Condition;
+import com.raizlabs.android.dbflow.sql.language.Select;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -60,11 +67,12 @@ public class MainActivity2 extends AppCompatActivity {
 
     List<Dzikir> dzkrs;
 
+    Person person;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
-
 
         ((PRThirteenApplication)getApplication()).getmNetComponent().inject(this);
 
@@ -72,19 +80,32 @@ public class MainActivity2 extends AppCompatActivity {
 
         setSupportActionBar(toolbarMainActivity2);
 
+        String[] unidentifiedPerson = getResources().getStringArray(R.array.unknown_user);
+        String[] audioFormat = getResources().getStringArray(R.array.audio_format);
+
         if(sharedPreferences.getString(FIRST_TIME, "").equals("")){
             sharedPreferences.edit().putString(FIRST_TIME, getString(R.string.salam)).apply();
+            insertKnownAudioType(audioFormat);
+            insertUnknownUser(unidentifiedPerson);
             Snackbar.make(coordinatorLayout, getString(R.string.salam), Snackbar.LENGTH_LONG).show();
+
+            try {
+                initData();
+                saveDzikirJsonToDb(dzkrs);
+            }catch (IOException ioe){
+                Snackbar.make(coordinatorLayout, ioe.getMessage(), Snackbar.LENGTH_LONG).show();
+            }
+        }else{
+            person = new Select().from(Person.class).where(
+                    Condition.column(Person_Table.name.getNameAlias())
+                            .eq(getUnIdentifiedPerson(unidentifiedPerson).getName()))
+                    .querySingle();
+            List<com.noiztezk.pr13.db.Dzikir> dbs = new Select().from(
+                    com.noiztezk.pr13.db.Dzikir.class
+            ).queryList();
+            dzkrs = fromDb(dbs);
         }
-
-
-        try {
-            initData();
-            setupRecyclerView();
-        }catch (IOException ioe){
-            Snackbar.make(coordinatorLayout, ioe.getMessage(), Snackbar.LENGTH_LONG).show();
-        }
-
+        setupRecyclerView();
     }
 
     public static List<Dzikir> getData(Context context, Gson gson) throws IOException{
@@ -105,7 +126,7 @@ public class MainActivity2 extends AppCompatActivity {
 
     private void setupRecyclerView(){
         recyclerViewMainActivity2.setLayoutManager(new LinearLayoutManager(recyclerViewMainActivity2.getContext()));
-        recyclerViewMainActivity2.setAdapter(new DzikirAdapter2(dzkrs));
+        recyclerViewMainActivity2.setAdapter(new DzikirAdapter2(person, dzkrs));
     }
 
     @Override
@@ -134,5 +155,107 @@ public class MainActivity2 extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void insertKnownAudioType(String[] audioFormat){
+        for(String audioKnownType : audioFormat){
+            AudioType audioType = new AudioType();
+            audioType.setAudioExtension(audioKnownType);
+            audioType.save();
+        }
+    }
+
+    private Person getUnIdentifiedPerson(String[] unidentifiedUser){
+        Person person = new Person();
+        final int name = 0, age = 1, email = 2, deviceId= 3;
+        for (String findHere : unidentifiedUser){
+            String[] parseString = findHere.split("_");
+            switch (Integer.parseInt(parseString[0])){
+                case name:
+                    person.setName(parseString[1]);
+                    break;
+                case age:
+                    person.setAge(parseString[1]);
+                    break;
+                case email:
+                    person.setEmail(parseString[1]);
+                    break;
+                case deviceId:
+                    person.setDeviceId(parseString[1]);
+                    break;
+            }
+        }
+        person.setLoginTimeStamp(System.currentTimeMillis());
+        return person;
+    }
+
+    private void insertUnknownUser(String[] unidentifiedUser){
+        person = getUnIdentifiedPerson(unidentifiedUser);
+        person.save();
+    }
+
+    private synchronized List<Dzikir> fromDb(List<com.noiztezk.pr13.db.Dzikir> dzikirLis){
+        List<Dzikir> dzikirs = new ArrayList<>();
+        for (com.noiztezk.pr13.db.Dzikir dz : dzikirLis){
+            Dzikir dzikir = fromDzikirDb(dz);
+
+            dzikirs.add(dzikir);
+        }
+        return dzikirs;
+    }
+
+    @Nullable
+    public static Dzikir fromDzikirName(String name){
+        com.noiztezk.pr13.db.Dzikir dzikir
+                = new Select().from(com.noiztezk.pr13.db.Dzikir.class).where(
+                    Condition.column(Dzikir_Table.dzikirName.getNameAlias()).eq(name)
+                ).querySingle();
+        return dzikir == null ? null : fromDzikirDb(dzikir);
+    }
+
+    @Nullable
+    public static com.noiztezk.pr13.db.Dzikir fromDzikirNameDb(String name){
+        com.noiztezk.pr13.db.Dzikir dzikir
+                = new Select().from(com.noiztezk.pr13.db.Dzikir.class).where(
+                Condition.column(Dzikir_Table.dzikirName.getNameAlias()).eq(name)
+        ).querySingle();
+        return dzikir;
+    }
+
+    @NonNull
+    public static Dzikir fromDzikirDb(com.noiztezk.pr13.db.Dzikir dz) {
+        Dzikir dzikir = new Dzikir();
+        dzikir.setName(dz.getDzikirName());
+        dzikir.setText(dz.getArabicDzikirText());
+        dzikir.setCount(Integer.toString(dz.getCountDzikir()));
+        String[] split = dz.getRead().split(",");
+        List<String> result = new ArrayList<>();
+        for (String test : split){
+            result.add(test);
+        }
+        dzikir.setRead(result);
+        return dzikir;
+    }
+
+    private synchronized void saveDzikirJsonToDb(List<Dzikir> dzikirs){
+        for ( Dzikir dzikir : dzikirs ){
+            com.noiztezk.pr13.db.Dzikir dz
+                    = new com.noiztezk.pr13.db.Dzikir();
+            dz.setDzikirName(dzikir.getName());
+            dz.setArabicDzikirText(dzikir.getText());
+            dz.setCountDzikir(Integer.parseInt(dzikir.getCount()));
+            String temp = "";
+            int end = dzikir.getRead().size()-1, count =0;
+            for (String read : dzikir.getRead()){
+                if(count == end){
+                    temp += read;
+                }else{
+                    temp+=read+",";
+                }
+                count++;
+            }
+            dz.setRead(temp);
+            dz.save();
+        }
     }
 }

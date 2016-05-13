@@ -5,6 +5,25 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_dzkir_detail">DzkirDetailActivity</string>
+    <string name="free">bebas</string>
 
     <string name="salam">"Assalamualaikum ?"</string>
+    <string-array name="audio_format">
+        <item>mp3</item>
+        <item>m4a</item>
+    </string-array>
+
+    <string-array name="unknown_user">
+        <item>0_tidak diketahui</item>
+        <item>1_99</item>
+        <item>2_test@email.com</item>
+        <item>3_device id</item>
+    </string-array>
+
+    <string-array name="read">
+        <item>morning</item>
+        <item>midday</item>
+        <item>afternoon</item>
+        <item>night</item>
+    </string-array>
 </resources>

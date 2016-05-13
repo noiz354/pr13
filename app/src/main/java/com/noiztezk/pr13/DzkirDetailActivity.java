@@ -16,6 +16,7 @@ import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import com.noiztezk.pr13.db.Person;
 import com.noiztezk.pr13.model.Dzikir;
 import com.noiztezk.pr13.utils.Constants;
 import com.noiztezk.pr13.view.DzkirDetailCounterFragment;
@@ -23,49 +24,51 @@ import com.noiztezk.pr13.view.DzkirPagerAdapter;
 
 import org.parceler.Parcels;
 
-import java.util.List;
+import butterknife.Bind;
+import butterknife.ButterKnife;
+import butterknife.OnCheckedChanged;
 
 public class DzkirDetailActivity extends AppCompatActivity {
+
     Dzikir data;
-    List<Dzikir> datas;
+
+    Person person;
+
+    @Bind(R.id.switch_to)
     Switch switch_to;
-    TextView counter, detail;
+    @Bind(R.id.counter)
+    TextView counter;
+    @Bind(R.id.detail)
+    TextView detail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
-
         getSupportActionBar().hide();
-
         setContentView(R.layout.activity_dzkir_detail);
-        switch_to = (Switch)findViewById(R.id.switch_to);
-        switch_to.setOnCheckedChangeListener(new switchCheckedLis());
-        counter = (TextView)findViewById(R.id.counter);
-        detail = (TextView)findViewById(R.id.detail);
-    }
+        ButterKnife.bind(this);
+        grabIntent();
 
-    private void grapIntent(){
-        Intent intent = getIntent();
-        data = Parcels.unwrap(intent.getParcelableExtra(Constants.customObject[0]));
-        datas = Parcels.unwrap(intent.getParcelableExtra(Constants.customObject[3]));
-        Log.d("MNORMANSYAH", DzkirDetailActivity.class.getSimpleName()+" data received " +data.toString());
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        grapIntent();
-        // TODO fix this FragmentFactory.getInstance().newInstance(DzkirDetailCounterFragment.class, this, null)
-        Fragment fragment = getSupportFragmentManager().findFragmentByTag(Constants.customFragmentTag[0]);
+        Fragment fragment = getSupportFragmentManager().findFragmentByTag(DzkirDetailCounterFragment.TAG);
         if(fragment != null && fragment instanceof DzkirDetailCounterFragment){
 
         }else {
+            DzkirDetailCounterFragment detailCounterFragment = DzkirDetailCounterFragment.newInstance(person, data);
             getSupportFragmentManager()
                     .beginTransaction()
-                    .add(R.id.dzkirDetailCounterFragment, DzkirDetailCounterFragment.newInstance(DzkirDetailActivity.class, data), Constants.customFragmentTag[0])
+                    .add(R.id.dzkirDetailCounterFragment, detailCounterFragment, DzkirDetailCounterFragment.TAG)
                     .commit();
         }
+    }
+
+    private void grabIntent(){
+        if (getIntent() == null)
+            return;
+
+        Intent intent = getIntent();
+        data = Parcels.unwrap(intent.getParcelableExtra(Constants.STATIC_VALUE.DATA_DZIKIR));
+        person = Parcels.unwrap(intent.getParcelableExtra(Constants.STATIC_VALUE.DATA_PERSON));
     }
 
     @Override
@@ -78,17 +81,12 @@ public class DzkirDetailActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        data = ((DzkirDetailCounterFragment)getSupportFragmentManager().findFragmentByTag(Constants.customFragmentTag[0])).realdata.mergeWithRef();
+        data = ((DzkirDetailCounterFragment)getSupportFragmentManager().findFragmentByTag(DzkirDetailCounterFragment.TAG)).realdata.mergeWithRef();
         Intent moveToOtherActivity = new Intent(this, MainActivity2.class);
         Bundle bndlanimation =
                 ActivityOptions.makeCustomAnimation(this, R.anim.animation, R.anim.animation2).toBundle();
-        moveToOtherActivity.putExtra(Constants.customObject[2], Parcels.wrap(data));
+        moveToOtherActivity.putExtra(Constants.STATIC_VALUE.DATA_DZIKIR, Parcels.wrap(data));
 
-        int searchIndex = -1;
-        Log.d("MNORMANSYAH", "using contain MNORMANSYAH search " + (searchIndex = datas.indexOf(data)));
-        if(searchIndex != -1)
-            datas.set(searchIndex, data);
-        moveToOtherActivity.putExtra(Constants.customObject[5], Parcels.wrap(datas));
         startActivity(moveToOtherActivity, bndlanimation);
         this.finish();
     }
@@ -108,24 +106,22 @@ public class DzkirDetailActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private class switchCheckedLis implements CompoundButton.OnCheckedChangeListener{
-        @Override
-        public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-            if(b){
-                detail.setVisibility(View.VISIBLE);
-                counter.setVisibility(View.GONE);
-                ViewPager pager = (ViewPager)DzkirDetailActivity.this.findViewById(R.id.dzkir_explain_view_page);
-                pager.setVisibility(View.VISIBLE);
-                FragmentPagerAdapter adapter = new DzkirPagerAdapter(getSupportFragmentManager());
-                pager.setAdapter(adapter);
-                DzkirDetailActivity.this.findViewById(R.id.dzkirDetailCounterFragment).setVisibility(View.GONE);
-            }else{
-                detail.setVisibility(View.GONE);
-                counter.setVisibility(View.VISIBLE);
-                ViewPager pager = (ViewPager)DzkirDetailActivity.this.findViewById(R.id.dzkir_explain_view_page);
-                pager.setVisibility(View.GONE);
-                DzkirDetailActivity.this.findViewById(R.id.dzkirDetailCounterFragment).setVisibility(View.VISIBLE);
-            }
+    @OnCheckedChanged(R.id.switch_to)
+    public void switchCheckedList(CompoundButton compoundButton, boolean b){
+        if(b){
+            detail.setVisibility(View.VISIBLE);
+            counter.setVisibility(View.GONE);
+            ViewPager pager = (ViewPager)DzkirDetailActivity.this.findViewById(R.id.dzkir_explain_view_page);
+            pager.setVisibility(View.VISIBLE);
+            FragmentPagerAdapter adapter = new DzkirPagerAdapter(getSupportFragmentManager());
+            pager.setAdapter(adapter);
+            DzkirDetailActivity.this.findViewById(R.id.dzkirDetailCounterFragment).setVisibility(View.GONE);
+        }else{
+            detail.setVisibility(View.GONE);
+            counter.setVisibility(View.VISIBLE);
+            ViewPager pager = (ViewPager)DzkirDetailActivity.this.findViewById(R.id.dzkir_explain_view_page);
+            pager.setVisibility(View.GONE);
+            DzkirDetailActivity.this.findViewById(R.id.dzkirDetailCounterFragment).setVisibility(View.VISIBLE);
         }
     }
 }

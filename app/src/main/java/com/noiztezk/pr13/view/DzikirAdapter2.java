@@ -10,17 +10,22 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.noiztezk.pr13.DzkirDetailActivity;
 import com.noiztezk.pr13.MainActivity2;
 import com.noiztezk.pr13.R;
+import com.noiztezk.pr13.db.Person;
 import com.noiztezk.pr13.model.Dzikir;
 import com.noiztezk.pr13.utils.Constants;
 
+import org.joda.time.DateTime;
 import org.parceler.Parcels;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import butterknife.Bind;
@@ -32,9 +37,11 @@ import butterknife.OnClick;
  */
 public class DzikirAdapter2 extends RecyclerView.Adapter<DzikirAdapter2.ViewHolder> {
 
+    Person person;
     List<Dzikir> dzikirs;
 
-    public DzikirAdapter2(List<Dzikir> dzikirs){
+    public DzikirAdapter2(Person person, List<Dzikir> dzikirs){
+        this.person = person;
         this.dzikirs = dzikirs;
     }
 
@@ -66,6 +73,10 @@ public class DzikirAdapter2 extends RecyclerView.Adapter<DzikirAdapter2.ViewHold
         ImageButton audio;
         @Bind(R.id.container)
         RelativeLayout container;
+        @Bind(R.id.read)
+        ImageView read;
+        @Bind(R.id.name)
+        TextView name;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -83,10 +94,34 @@ public class DzikirAdapter2 extends RecyclerView.Adapter<DzikirAdapter2.ViewHold
             else
                 temp += count;
 
+            this.count.setTypeface(Typeface.createFromAsset(itemView.getContext().getAssets(), "Roboto-Bold.ttf"));
             this.count.setText(temp);
             this.text.setText(dzikir.getText()+"");
-            Typeface tf = Typeface.createFromAsset(itemView.getContext().getAssets(), "MTCORSVA.ttf");
-            this.text.setTypeface(tf);
+//            this.text.setTypeface(Typeface.createFromAsset(itemView.getContext().getAssets(), "Roboto-Regular.ttf"));
+
+            name.setTypeface(Typeface.createFromAsset(itemView.getContext().getAssets(), "Roboto-Regular.ttf"));
+            name.setText(dzikir.getName());
+
+            read.setImageResource(toImageResource(dzikir.getRead()
+                    , itemView.getResources().getStringArray(R.array.read)));
+
+        }
+
+        private int toImageResource(List<String> timeToDzikir, String[] availableDzikir){
+            java.util.Date juDate = new Date();
+            DateTime dt = new DateTime(juDate);
+            int hour = dt.getHourOfDay();// 0-24
+            if(hour>=0 && hour<12 && timeToDzikir.contains(availableDzikir[0])){
+                return R.mipmap.morning;
+            }else if(hour>=12 && hour <16 && timeToDzikir.contains(availableDzikir[1])){
+                return R.mipmap.sunny;
+            }else if(hour>=15 && hour < 19 && timeToDzikir.contains(availableDzikir[2])){
+                return R.mipmap.afternoon;
+            }else if(hour>=18 && timeToDzikir.contains(availableDzikir[3])){
+                return R.mipmap.night;
+            }else{
+                throw new RuntimeException("not defined yet your time");
+            }
         }
 
         @SuppressWarnings("NewApi")
@@ -96,9 +131,9 @@ public class DzikirAdapter2 extends RecyclerView.Adapter<DzikirAdapter2.ViewHold
             Intent moveToAnotherActivity = new Intent(mContext, DzkirDetailActivity.class);
             Bundle bndlanimation =
                     ActivityOptions.makeCustomAnimation(mContext, R.anim.animation, R.anim.animation2).toBundle();
-            moveToAnotherActivity.putExtra(Constants.customObject[0], Parcels.wrap(dzikir));
-            moveToAnotherActivity.putExtra(Constants.customObject[3], Parcels.wrap(dzikirs));
-            moveToAnotherActivity.putExtra(Constants.customObject[4], position);
+            moveToAnotherActivity.putExtra(Constants.STATIC_VALUE.DATA_DZIKIR, Parcels.wrap(dzikir));
+            moveToAnotherActivity.putExtra(Constants.STATIC_VALUE.DATA_PERSON, Parcels.wrap(person));
+
             mContext.startActivity(moveToAnotherActivity, bndlanimation);
 
             if(mContext != null && mContext instanceof MainActivity2)

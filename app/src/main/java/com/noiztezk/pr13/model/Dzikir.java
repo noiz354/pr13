@@ -86,4 +86,19 @@ public class Dzikir {
         this.count = count;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public List<String> getRead() {
+        return read;
+    }
+
+    public void setRead(List<String> read) {
+        this.read = read;
+    }
 }
