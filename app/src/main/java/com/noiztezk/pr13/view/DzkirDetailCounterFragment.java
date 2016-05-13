@@ -19,9 +19,10 @@ import com.noiztezk.pr13.db.Person;
 import com.noiztezk.pr13.db.Person_Table;
 import com.noiztezk.pr13.db.ReadDzikir;
 import com.noiztezk.pr13.db.ReadDzikir_Table;
-import com.noiztezk.pr13.interfaces.DzkrCountModel;
 import com.noiztezk.pr13.model.Dzikir;
-import com.noiztezk.pr13.model.DzkrCount;
+import com.noiztezk.pr13.presenters.DzkirDetail;
+import com.noiztezk.pr13.presenters.DzkirDetailImpl;
+import com.noiztezk.pr13.presenters.DzkirDetailView;
 import com.noiztezk.pr13.utils.Constants;
 import com.raizlabs.android.dbflow.sql.language.SQLCondition;
 import com.raizlabs.android.dbflow.sql.language.Select;
@@ -42,15 +43,12 @@ import butterknife.OnClick;
 /**
  * Created by Normansyah Putra on 7/26/2015.
  */
-public class DzkirDetailCounterFragment extends Fragment implements DzkrCountModel {
+public class DzkirDetailCounterFragment extends Fragment implements DzkirDetailView {
     public static final String TAG = "DzkirDetailCounterFragment";
     public static final String DATE_FORMAT = "MM/dd/yyyy";
     public static final String TIME_FORMAT = "HH:mm:ss";
-    Dzikir data;
-    com.noiztezk.pr13.db.Dzikir dataDb;
-    public DzkrCount realdata;
-    Person person;
-    ReadDzikir readDzikir;
+
+    DzkirDetail dzkirDetail;
 
     @Bind(R.id.counterButton)
     at.markushi.ui.CircleButton counterButton;
@@ -68,57 +66,8 @@ public class DzkirDetailCounterFragment extends Fragment implements DzkrCountMod
         return fragment;
     }
 
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
 
-        // handle fragment arguments
-        Bundle arguments = getArguments();
-        if(arguments != null){
-            handleArguments(arguments);
-        }
-
-        handleSavedInstanceState(savedInstanceState);
-        Log.d("MNORMANSYAH", "after rotate : " + realdata);
-    }
-
-    private void handleArguments(Bundle arguments)
-    {
-        data = Parcels.unwrap(arguments.getParcelable(Constants.STATIC_VALUE.DATA_DZIKIR));
-        dataDb = MainActivity2.fromDzikirNameDb(data.getName());
-        person = Parcels.unwrap(arguments.getParcelable(Constants.STATIC_VALUE.DATA_PERSON));
-
-        Log.d("MNORMANSYAH", "received "+TAG+" : "+data);
-        realdata = new DzkrCount();
-        realdata.dzkrRef = data;
-        data = null;// discard after save to real data
-
-        List<ReadDzikir> dzikirList = new Select().from(ReadDzikir.class).queryList();
-        Log.d("MNORMANSYAH", ""+dzikirList.toString());
-
-        String currentDate = getDate();
-        readDzikir = new Select().from(ReadDzikir.class).where(
-                Person_Table.id.is(person.getId())
-        ).and(Dzikir_Table.id.is(dataDb.getId()))
-                .and(ReadDzikir_Table.Day.is(currentDate)).querySingle();
-
-        if(readDzikir == null) {
-            readDzikir = new ReadDzikir();
-            readDzikir.setPerson(person);
-            readDzikir.setDzikir(dataDb);
-            readDzikir.setDay(currentDate);
-            readDzikir.setStartTime(getTime());
-            readDzikir.setFinishTime(getTime());
-            readDzikir.setCountByPerson(0);
-            readDzikir.save();
-        }else{
-            realdata.setCount(readDzikir.getCountByPerson());
-        }
-
-
-    }
-
-    private String getDate(){
+    public static String getDate(){
         // Parsing the date
         DateTime jodatime = new DateTime(new Date());
         // Format for output
@@ -126,7 +75,7 @@ public class DzkirDetailCounterFragment extends Fragment implements DzkrCountMod
         return dtfOut.print(jodatime);
     }
 
-    private String getTime(){
+    public static String getTime(){
         // Parsing the date
         DateTime jodatime = new DateTime(new Date());
         // Format for output
@@ -134,68 +83,53 @@ public class DzkirDetailCounterFragment extends Fragment implements DzkrCountMod
         return dtfOut.print(jodatime);
     }
 
-    private void handleSavedInstanceState(Bundle savedInstanceState){
-        if(savedInstanceState != null){
-            realdata  = Parcels.unwrap(
-                    savedInstanceState.getParcelable(
-                            Constants.STATIC_VALUE.DATA_DZIKIR
-                    )
-            );
-        }
-    }
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View base = inflater.inflate(R.layout.dzkir_counter_layout, null);
         ButterKnife.bind(this, base);
+        dzkirDetail = new DzkirDetailImpl(this);
+        dzkirDetail.printAllQuery();
+        dzkirDetail.handleArgument(getArguments());
+        dzkirDetail.handleSavedInstanceState(savedInstanceState);
         return base;
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        realdata.setModel(this);
-        initData();
-    }
-
-    private void initData(){
-        if(realdata.getCount() < 0){
-            mCurrent.setText(getString(R.string.free));
-        }else{
-            mCurrent.setText(realdata.getCount()+"");
-        }
-
-        arabic.setText(realdata.dzkrRef.getText());
+        dzkirDetail.initData();
     }
 
     @Override
-    public void onPause() {
-        super.onPause();
-        realdata.setModel(null);
+    public Context getViewContext() {
+        return getActivity();
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        ButterKnife.unbind(this);
     }
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        Log.d("MNORMANSYAH", "before rotate : " + realdata);
-        outState.putParcelable(Constants.STATIC_VALUE.DATA_DZIKIR, Parcels.wrap(realdata));
+        dzkirDetail.saveDataInstanceState(outState);
     }
 
     @OnClick(R.id.counterButton)
     public void counterButtonClick(){
-        realdata.incrementCount();
-        readDzikir.setCountByPerson(realdata.getCount());
-        readDzikir.save();
+        dzkirDetail.incrementCount();
     }
 
     @Override
-    public void updateUI(int result) {
-        mCurrent.setText(result+"");
+    public void setCounterText(String dzkirCount) {
+        mCurrent.setText(dzkirCount);
     }
 
     @Override
-    public void updateUI(String result) {
-        mCurrent.setText(result);
+    public void setArabicText(String arabicText) {
+        arabic.setText(arabicText);
     }
 }
