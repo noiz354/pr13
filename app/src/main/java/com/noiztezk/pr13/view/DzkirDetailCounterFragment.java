@@ -32,6 +32,7 @@ import org.joda.time.format.DateTimeFormatter;
 import org.parceler.Parcels;
 
 import java.util.Date;
+import java.util.List;
 
 import at.markushi.ui.CircleButton;
 import butterknife.Bind;
@@ -91,6 +92,9 @@ public class DzkirDetailCounterFragment extends Fragment implements DzkrCountMod
         realdata = new DzkrCount();
         realdata.dzkrRef = data;
         data = null;// discard after save to real data
+
+        List<ReadDzikir> dzikirList = new Select().from(ReadDzikir.class).queryList();
+        Log.d("MNORMANSYAH", ""+dzikirList.toString());
 
         String currentDate = getDate();
         readDzikir = new Select().from(ReadDzikir.class).where(

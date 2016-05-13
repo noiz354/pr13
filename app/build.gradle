@@ -28,6 +28,11 @@ android {
         exclude 'LICENSE.txt'
     }
 
+    signingConfigs {
+        debug {
+            storeFile file("debug.keystore")
+        }
+    }
 }
 
 configurations {
