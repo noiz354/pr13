@@ -94,4 +94,33 @@ public class Person  extends BaseModel {
     public void setLogoutTimeStamp(long logoutTimeStamp) {
         this.logoutTimeStamp = logoutTimeStamp;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Person person = (Person) o;
+
+        if (loginTimeStamp != person.loginTimeStamp) return false;
+        if (logoutTimeStamp != person.logoutTimeStamp) return false;
+        if (id != null ? !id.equals(person.id) : person.id != null) return false;
+        if (name != null ? !name.equals(person.name) : person.name != null) return false;
+        if (age != null ? !age.equals(person.age) : person.age != null) return false;
+        if (email != null ? !email.equals(person.email) : person.email != null) return false;
+        return deviceId != null ? deviceId.equals(person.deviceId) : person.deviceId == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (age != null ? age.hashCode() : 0);
+        result = 31 * result + (email != null ? email.hashCode() : 0);
+        result = 31 * result + (deviceId != null ? deviceId.hashCode() : 0);
+        result = 31 * result + (int) (loginTimeStamp ^ (loginTimeStamp >>> 32));
+        result = 31 * result + (int) (logoutTimeStamp ^ (logoutTimeStamp >>> 32));
+        return result;
+    }
 }

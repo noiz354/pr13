@@ -37,6 +37,24 @@ public class DzkirDetailImpl implements DzkirDetail{
         this.dzkirDetailView = dzkirDetailView;
     }
 
+    /**
+     * This is for the sake of unit testing
+     * @param dzkirDetailView
+     * @param data
+     * @param dataDb
+     * @param person
+     * @param readDzikir
+     */
+    public DzkirDetailImpl(DzkirDetailView dzkirDetailView, Dzikir data
+            , com.noiztezk.db.Dzikir dataDb, Person person
+            , ReadDzikir readDzikir){
+        this.dzkirDetailView = dzkirDetailView;
+        this.data = data;
+        this.dataDb = dataDb;
+        this.person = person;
+        this.readDzikir = readDzikir;
+    }
+
     @Override
     public void initData() {
         if(readDzikir.getCountByPerson() < 0){
@@ -77,8 +95,8 @@ public class DzkirDetailImpl implements DzkirDetail{
 
     public static ReadDzikir getReadDzikir(String currentDate, Long personId, Long dzkirId) {
         return new Select().from(ReadDzikir.class)
-                .where(Person_Table.id.is(personId))
-                .and(Dzikir_Table.id.is(dzkirId))
+                .where(ReadDzikir_Table.PersonId.is(personId))
+                .and(ReadDzikir_Table.DzikirId.is(dzkirId))
                 .and(ReadDzikir_Table.Day.is(currentDate))
                 .querySingle();
     }
