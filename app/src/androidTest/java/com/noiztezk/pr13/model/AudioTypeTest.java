@@ -6,9 +6,9 @@ import android.support.test.runner.AndroidJUnit4;
 
 import com.noiztezk.pr13.PRThirteenApplication;
 import com.noiztezk.pr13.TestComponent;
-import com.noiztezk.pr13.db.AudioType;
-import com.noiztezk.pr13.db.AudioType_Table;
-import com.noiztezk.pr13.db.DzikirDatabase;
+import com.noiztezk.db.AudioType;
+import com.noiztezk.db.AudioType_Table;
+import com.noiztezk.db.DzikirDatabase;
 import com.raizlabs.android.dbflow.sql.language.Condition;
 import com.raizlabs.android.dbflow.sql.language.Select;
 

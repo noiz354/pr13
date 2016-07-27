@@ -1,7 +1,7 @@
 package com.noiztezk.pr13;
 
-import com.noiztezk.pr13.db.Dzikir;
-import com.noiztezk.pr13.db.DzikirDatabase;
+import com.noiztezk.db.Dzikir;
+import com.noiztezk.db.DzikirDatabase;
 import com.raizlabs.android.dbflow.config.FlowConfig;
 import com.raizlabs.android.dbflow.config.FlowManager;
 
