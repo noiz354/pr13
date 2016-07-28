@@ -1,4 +1,4 @@
-package com.noiztezk.pr13;
+package com.noiztezk.pr13.test.recyclerview;
 
 import android.content.res.Resources;
 import android.support.v7.widget.RecyclerView;

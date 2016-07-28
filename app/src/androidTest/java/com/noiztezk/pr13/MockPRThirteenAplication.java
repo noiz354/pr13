@@ -2,6 +2,9 @@ package com.noiztezk.pr13;
 
 import com.noiztezk.db.Dzikir;
 import com.noiztezk.db.DzikirDatabase;
+import com.noiztezk.pr13.test.dagger.DaggerTestComponent;
+import com.noiztezk.pr13.test.dagger.MockAppModule;
+import com.noiztezk.pr13.test.dagger.MockNetModule;
 import com.raizlabs.android.dbflow.config.FlowConfig;
 import com.raizlabs.android.dbflow.config.FlowManager;
 
@@ -15,10 +18,12 @@ public class MockPRThirteenAplication extends PRThirteenApplication {
     @Override
     public void onCreate() {
         super.onCreate();
+        /*
         FlowManager.destroy();
 //        resetSingleton(FlowManager.class, "mDatabaseHolder");
         getmNetComponent().provideApplication().deleteDatabase(DzikirDatabase.NAME + ".db");
         FlowManager.init(new FlowConfig.Builder(this).build());
+        */
     }
 
     @Override

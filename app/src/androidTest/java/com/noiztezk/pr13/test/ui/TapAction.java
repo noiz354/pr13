@@ -1,34 +1,97 @@
-package com.noiztezk.pr13;
+package com.noiztezk.pr13.test.ui;
 
 import com.noiztezk.pr13.MainActivity2;
+import com.noiztezk.pr13.R;
+import com.noiztezk.pr13.test.utils.TestUtils;
 
-import org.hamcrest.Matcher;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import android.os.SystemClock;
-import android.support.test.espresso.UiController;
-import android.support.test.espresso.ViewAction;
+import android.support.test.espresso.matcher.ViewMatchers;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 import static android.support.test.espresso.Espresso.*;
 import static android.support.test.espresso.action.ViewActions.*;
-import static android.support.test.espresso.contrib.RecyclerViewActions.scrollToPosition;
 import static android.support.test.espresso.matcher.ViewMatchers.*;
 import static android.support.test.espresso.assertion.ViewAssertions.*;
+import static com.checkdroid.crema.EspressoPlus.takeScreenShot;
+import static com.checkdroid.crema.EspressoPlus.withXPath;
 import static org.hamcrest.Matchers.*;
 import android.test.suitebuilder.annotation.LargeTest;
-import static com.checkdroid.crema.EspressoPlus.*;
 import android.support.test.espresso.contrib.RecyclerViewActions;
-import android.view.View;
 
+/**
+ * This is test tap at list and perform click at certain position.
+ */
 @RunWith(AndroidJUnit4.class)
 @LargeTest
-public class dzikir13 {
+public class TapAction {
 
     @Rule
     public final ActivityTestRule<MainActivity2> main = new ActivityTestRule<>(MainActivity2.class);
+
+    /**
+     * Test for Dzkir-13
+     * @author - M Normansyah Putra ND
+     * Generated using Barista - http://checkdroid.com/barista
+     */
+    @Test
+    public void perform_Tap_At_Index_1() {
+        onView(ViewMatchers.withId(R.id.recylerview_main_activity2)).perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
+        onView(withId(R.id.counterButton)).perform(click());
+        onView(withId(R.id.counterButton)).perform(click());
+        onView(withId(R.id.counterButton)).perform(click());
+        onView(withId(R.id.counterButton)).perform(click());
+        onView(withId(R.id.counterButton)).perform(click());
+        onView(withId(R.id.btnNumNotif)).check(matches(withText("5")));
+    }
+
+    /**
+     * Test for Dzkir-13
+     * @author - M Normansyah Putra ND
+     * Generated using Barista - http://checkdroid.com/barista
+     *
+     * android.support.test.espresso.NoMatchingViewException: No views in hierarchy found matching: with id: com.noiztezk.pr13:id/arabic
+     */
+    @Test
+    public void test_Dzikir7() {
+        onView(withId(R.id.recylerview_main_activity2)).perform(RecyclerViewActions.actionOnItemAtPosition(8, click()));
+        onView(withId(R.id.arabic)).check(matches(withText("بِسْمِ اللَّهِ الَّذِیْ لَا یَضُرُّ مَعَ اسْمِهِ شَیْ ءٌ فِیْ الْاَرْضِ وَلَا فِی السَّمَآءِ وَھُوَ السَّمِیْعُ الْعَلِیْمُ")));
+    }
+
+    /**
+     * Test for Dzkir-13
+     * @author - M Normansyah Putra ND
+     * Generated using Barista - http://checkdroid.com/barista
+     */
+    @Test
+    public void test_Dzikir8() {
+        takeScreenShot();
+        onView(withId(R.id.recylerview_main_activity2)).perform(RecyclerViewActions.scrollToPosition(12));
+        onView(withId(R.id.recylerview_main_activity2)).perform(RecyclerViewActions.actionOnItemAtPosition(12, click()));
+//        onView(withId(R.id.arabic)).check(matches(withText("سُبْحَانَ اللّهِ وَ بِحَمْدِهِ ، سُبْحَانَ اللّهِ الْعَظِيمِ")));
+        onView(withId(R.id.counterButton)).perform(click());
+        onView(withId(R.id.counterButton)).perform(click());
+        onView(withId(R.id.counterButton)).perform(click());
+        onView(withId(R.id.counterButton)).perform(click());
+        onView(withId(R.id.counterButton)).perform(click());
+        onView(withId(R.id.counterButton)).perform(click());
+        onView(withId(R.id.counterButton)).perform(click());
+        onView(withId(R.id.counterButton)).perform(click());
+        onView(withId(R.id.btnNumNotif)).check(matches(withText("bebas")));
+    }
+
+    /**
+     * Test for Dzkir-13
+     * @author - M Normansyah Putra ND
+     * Generated using Barista - http://checkdroid.com/barista
+     */
+    @Test
+    public void test_Dzikir9() {
+        onView(withId(R.id.recylerview_main_activity2)).perform(RecyclerViewActions.actionOnItemAtPosition(11, click()));
+        onView(allOf(withId(R.id.arabic), withContentDescription("Hello!"))).check(matches(withText("سُبْحَانَ اللّهِ ، والْحَمْدُللّهِ ، وَ لا اِلهَ اِلَّا اللّهُ ، وَ اللّهُ اَكْبَرُ ، وَ لا حَوْلَ وَ لا قُوَّةَ اِلَّا بِاللّهِ -")));
+    }
 
     /**
      * Test for Dzkir-13
@@ -80,7 +143,7 @@ public class dzikir13 {
      * Generated using Barista - http://checkdroid.com/barista
      */
     @Test
-    public void test_Dzikir9() {
+    public void test_Dzikir10() {
         onView(withId(R.id.recylerview_main_activity2)).perform(RecyclerViewActions.actionOnItemAtPosition(11, click()));
         onView(withId(R.id.arabic)).check(matches(withText("سُبْحَانَ اللّهِ ، والْحَمْدُللّهِ ، وَ لا اِلهَ اِلَّا اللّهُ ، وَ اللّهُ اَكْبَرُ ، وَ لا حَوْلَ وَ لا قُوَّةَ اِلَّا بِاللّهِ -")));
     }
@@ -96,7 +159,7 @@ public class dzikir13 {
 //        onView(withId(R.id.recylerview_main_activity2)).perform(RecyclerViewActions.actionOnItemAtPosition(12, click()));
 
         onView(withId(R.id.recylerview_main_activity2)).perform(
-                RecyclerViewActions.actionOnItemAtPosition(0, clickChildViewWithId(R.id.text)));
+                RecyclerViewActions.actionOnItemAtPosition(0, TestUtils.clickChildViewWithId(R.id.text)));
 
 //        SystemClock.sleep(1000);
 
@@ -111,35 +174,6 @@ public class dzikir13 {
         onView(withId(R.id.btnNumNotif)).check(matches(isDisplayed()));
     }
 
-    public static void tapRecyclerViewItem(int recyclerViewId, int position) {
-        onView(withId(recyclerViewId)).perform(scrollToPosition(position));
-        onView(withRecyclerView(recyclerViewId).atPosition(position)).perform(click());
-    }
 
-    // Convenience helper
-    public static RecyclerViewMatcher withRecyclerView(final int recyclerViewId) {
-        return new RecyclerViewMatcher(recyclerViewId);
-    }
-
-    public static ViewAction clickChildViewWithId(final int id) {
-        return new ViewAction() {
-            @Override
-            public Matcher<View> getConstraints() {
-                return null;
-            }
-
-            @Override
-            public String getDescription() {
-                return "Click on a child view with specified id.";
-            }
-
-            @Override
-            public void perform(UiController uiController, View view) {
-                View v = view.findViewById(id);
-                if (v != null) {
-                    v.performClick();
-                }
-            }
-        };
-    }
 }
+

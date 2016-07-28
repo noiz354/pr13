@@ -1,4 +1,4 @@
-package com.noiztezk.pr13;
+package com.noiztezk.pr13.test.recyclerview;
 
 import android.support.test.espresso.NoMatchingViewException;
 import android.support.test.espresso.PerformException;

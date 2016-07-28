@@ -1,11 +1,11 @@
-package com.noiztezk.pr13.model;
+package com.noiztezk.pr13.test.db;
 
 import android.app.Instrumentation;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
 
 import com.noiztezk.pr13.PRThirteenApplication;
-import com.noiztezk.pr13.TestComponent;
+import com.noiztezk.pr13.test.dagger.TestComponent;
 import com.noiztezk.db.AudioType;
 import com.noiztezk.db.AudioType_Table;
 import com.noiztezk.db.DzikirDatabase;

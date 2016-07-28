@@ -1,4 +1,4 @@
-package com.noiztezk.pr13;
+package com.noiztezk.pr13.test.ui;
 
 import android.app.Instrumentation;
 import android.content.Intent;
@@ -10,6 +10,10 @@ import android.support.test.runner.AndroidJUnit4;
 import android.test.suitebuilder.annotation.LargeTest;
 
 import com.google.gson.Gson;
+import com.noiztezk.pr13.MainActivity2;
+import com.noiztezk.pr13.PRThirteenApplication;
+import com.noiztezk.pr13.R;
+import com.noiztezk.pr13.test.dagger.TestComponent;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -98,7 +102,7 @@ public class MainActivityTest {
     public void performSettingClick(){
         mActivityRule.launchActivity(new Intent());
 
-        onView(withId(R.id.action_settings)).perform(click());
+        onView(ViewMatchers.withId(R.id.action_settings)).perform(click());
     }
 
     @Test

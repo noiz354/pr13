@@ -1,4 +1,4 @@
-package com.noiztezk.pr13;
+package com.noiztezk.pr13.test.ui;
 
 import android.app.Instrumentation;
 import android.content.Intent;
@@ -13,6 +13,12 @@ import android.test.suitebuilder.annotation.LargeTest;
 import android.view.View;
 
 import com.google.gson.Gson;
+import com.noiztezk.pr13.MainActivity2;
+import com.noiztezk.pr13.PRThirteenApplication;
+import com.noiztezk.pr13.R;
+import com.noiztezk.pr13.test.recyclerview.RecyclerViewInteraction;
+import com.noiztezk.pr13.test.dagger.TestComponent;
+import com.noiztezk.pr13.test.utils.TestUtils;
 import com.noiztezk.pr13.model.Dzikir;
 
 import org.junit.Before;
@@ -78,7 +84,7 @@ public class MainActivity2Test {
         mActivityRule.launchActivity(new Intent());
 
             RecyclerViewInteraction.
-                    <Dzikir>onRecyclerView(withId(R.id.recylerview_main_activity2))
+                    <Dzikir>onRecyclerView(ViewMatchers.withId(R.id.recylerview_main_activity2))
                     .withItems(readjsonDzikir)
                     .check(new RecyclerViewInteraction.ItemViewAssertion<Dzikir>() {
                         @Override
