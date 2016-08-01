@@ -10,6 +10,7 @@ import com.noiztezk.db.AudioType;
 import com.noiztezk.db.AudioType_Table;
 import com.noiztezk.db.DzikirDatabase;
 import com.raizlabs.android.dbflow.sql.language.Condition;
+import com.raizlabs.android.dbflow.sql.language.Delete;
 import com.raizlabs.android.dbflow.sql.language.Select;
 
 import org.junit.After;
@@ -60,9 +61,4 @@ public class AudioTypeTest {
         Assert.assertTrue(m4a.getAudioExtension().equals("m4a"));
 
     }
-
-//    @After
-//    public void deleteDb(){
-//        component.provideApplication().deleteDatabase(DzikirDatabase.NAME + ".db");
-//    }
 }

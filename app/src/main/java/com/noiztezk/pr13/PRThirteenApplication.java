@@ -16,6 +16,10 @@ public class PRThirteenApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        onCreateReal();
+    }
+
+    protected void onCreateReal(){
         JodaTimeAndroid.init(this);
         FlowManager.init(new FlowConfig.Builder(this).build());
     }

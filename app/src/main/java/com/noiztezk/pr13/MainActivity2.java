@@ -25,6 +25,7 @@ import com.noiztezk.db.Person;
 import com.noiztezk.db.Person_Table;
 import com.noiztezk.pr13.model.Dzikir;
 import com.noiztezk.pr13.model.Example;
+import com.noiztezk.pr13.presenters.HomeView;
 import com.noiztezk.pr13.view.DzikirAdapter2;
 import com.raizlabs.android.dbflow.sql.language.Condition;
 import com.raizlabs.android.dbflow.sql.language.Select;
@@ -42,10 +43,7 @@ import butterknife.ButterKnife;
 /**
  * Created by noiz354 on 4/28/16.
  */
-public class MainActivity2 extends AppCompatActivity {
-
-    public static final String FIRST_TIME = "first_time";
-    public static final String DEF_PR13_JSON = "def_pr13.json";
+public class MainActivity2 extends AppCompatActivity implements HomeView {
     @Bind(R.id.coor_layout_main_activity2)
     CoordinatorLayout coordinatorLayout;
 
@@ -79,25 +77,23 @@ public class MainActivity2 extends AppCompatActivity {
 
         setSupportActionBar(toolbarMainActivity2);
 
-        String[] unidentifiedPerson = getResources().getStringArray(R.array.unknown_user);
-        String[] audioFormat = getResources().getStringArray(R.array.audio_format);
-
-        if(sharedPreferences.getString(FIRST_TIME, "").equals("")){
-            sharedPreferences.edit().putString(FIRST_TIME, getString(R.string.salam)).apply();
-            insertKnownAudioType(audioFormat);
-            insertUnknownUser(unidentifiedPerson);
+        if(isFirstTime()){
+            setFirstTime(getSalamText(), false);
+            insertKnownAudioType(getKnownAudioFormat());
+            insertUnknownUser(getUnIdentifiedPerson());
             Snackbar.make(coordinatorLayout, getString(R.string.salam), Snackbar.LENGTH_LONG).show();
 
             try {
                 initData();
                 saveDzikirJsonToDb(dzkrs);
             }catch (IOException ioe){
+                setFirstTime(null, true);
                 Snackbar.make(coordinatorLayout, ioe.getMessage(), Snackbar.LENGTH_LONG).show();
             }
         }else{
             person = new Select().from(Person.class).where(
                     Condition.column(Person_Table.name.getNameAlias())
-                            .eq(getUnIdentifiedPerson(unidentifiedPerson).getName()))
+                            .eq(getUnIdentifiedPerson(getUnIdentifiedPerson()).getName()))
                     .querySingle();
             List<com.noiztezk.db.Dzikir> dbs = new Select().from(
                     com.noiztezk.db.Dzikir.class
@@ -255,6 +251,35 @@ public class MainActivity2 extends AppCompatActivity {
             }
             dz.setRead(temp);
             dz.save();
+        }
+    }
+
+    @Override
+    public String[] getUnIdentifiedPerson() {
+        return getResources().getStringArray(R.array.unknown_user);
+    }
+
+    @Override
+    public String[] getKnownAudioFormat() {
+        return getResources().getStringArray(R.array.audio_format);
+    }
+
+    @Override
+    public String getSalamText() {
+        return getString(R.string.salam);
+    }
+
+    @Override
+    public boolean isFirstTime() {
+        return sharedPreferences.getString(FIRST_TIME, "").equals("");
+    }
+
+    @Override
+    public void setFirstTime(String firstTimeText, boolean firstTime) {
+        if(firstTime){
+            sharedPreferences.edit().remove(FIRST_TIME);
+        }else{
+            sharedPreferences.edit().putString(FIRST_TIME, firstTimeText).apply();
         }
     }
 }
