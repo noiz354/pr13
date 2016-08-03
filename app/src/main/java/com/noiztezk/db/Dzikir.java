@@ -35,6 +35,16 @@ public class Dzikir extends BaseModel {
     @Column
     String read;
 
+    public Dzikir(){}
+
+    public Dzikir(Dzikir dzikir){
+        setRead(dzikir.getRead());
+        setReminderTime(dzikir.getReminderTime());
+        setCountDzikir(dzikir.getCountDzikir());
+        setArabicDzikirText(dzikir.getArabicDzikirText());
+        setDzikirName(dzikir.getDzikirName());
+    }
+
     public String getRead() {
         return read;
     }
