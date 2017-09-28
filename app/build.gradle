@@ -98,7 +98,13 @@ dependencies {
     compile "com.android.support:recyclerview-v7:$GOOGLE_SUPPORT_LIBRARY_VERSION"
     compile 'com.facebook.stetho:stetho:1.5.0'
     compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+
+    // Firebase Authentication
+    compile 'com.google.firebase:firebase-auth:11.4.0'
+
+    // Google Sign In SDK (only required for Google Sign In)
+    compile 'com.google.android.gms:play-services-auth:11.4.0'
 }
-repositories {
-    mavenCentral()
-}
+
+// https://stackoverflow.com/questions/46369055/error-fix-the-version-conflict-google-services-plugin-using-productflavors
+apply plugin: 'com.google.gms.google-services'
