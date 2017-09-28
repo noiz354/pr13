@@ -30,5 +30,11 @@ Thumbs.db
 /local.properties
 /.idea/workspace.xml
 /.idea/libraries
-.DS_Store
-/build
+*/build/*
+*.iml
+gradle
+.idea
+*/build/intermediates/*
+*/build/outputs/
+/build/generated/
+/build/android-profile/
