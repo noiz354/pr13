@@ -24,9 +24,10 @@ import com.noiztezk.pr13.view.DzkirPagerAdapter;
 
 import org.parceler.Parcels;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnCheckedChanged;
+import butterknife.Unbinder;
 
 public class DzkirDetailActivity extends AppCompatActivity {
 
@@ -34,12 +35,14 @@ public class DzkirDetailActivity extends AppCompatActivity {
 
     Person person;
 
-    @Bind(R.id.switch_to)
+    @BindView(R.id.switch_to)
     Switch switch_to;
-    @Bind(R.id.counter)
+    @BindView(R.id.counter)
     TextView counter;
-    @Bind(R.id.detail)
+    @BindView(R.id.detail)
     TextView detail;
+
+    Unbinder bind;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +50,7 @@ public class DzkirDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
         setContentView(R.layout.activity_dzkir_detail);
-        ButterKnife.bind(this);
+        bind = ButterKnife.bind(this);
         grabIntent();
 
         Fragment fragment = getSupportFragmentManager().findFragmentByTag(DzkirDetailCounterFragment.TAG);
@@ -124,5 +127,11 @@ public class DzkirDetailActivity extends AppCompatActivity {
             pager.setVisibility(View.GONE);
             DzkirDetailActivity.this.findViewById(R.id.dzkirDetailCounterFragment).setVisibility(View.VISIBLE);
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        bind.unbind();
     }
 }

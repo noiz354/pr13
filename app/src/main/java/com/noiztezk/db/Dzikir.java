@@ -18,7 +18,7 @@ public class Dzikir extends BaseModel {
     @PrimaryKey(
             autoincrement = true
     )
-    Long id;
+    long id;
 
     @Column
     String dzikirName;
@@ -53,11 +53,11 @@ public class Dzikir extends BaseModel {
         this.read = read;
     }
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -100,9 +100,9 @@ public class Dzikir extends BaseModel {
 
         Dzikir dzikir = (Dzikir) o;
 
+        if (id != dzikir.id) return false;
         if (countDzikir != dzikir.countDzikir) return false;
         if (reminderTime != dzikir.reminderTime) return false;
-        if (id != null ? !id.equals(dzikir.id) : dzikir.id != null) return false;
         if (dzikirName != null ? !dzikirName.equals(dzikir.dzikirName) : dzikir.dzikirName != null)
             return false;
         if (arabicDzikirText != null ? !arabicDzikirText.equals(dzikir.arabicDzikirText) : dzikir.arabicDzikirText != null)
@@ -113,7 +113,7 @@ public class Dzikir extends BaseModel {
 
     @Override
     public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
+        int result = (int) (id ^ (id >>> 32));
         result = 31 * result + (dzikirName != null ? dzikirName.hashCode() : 0);
         result = 31 * result + (arabicDzikirText != null ? arabicDzikirText.hashCode() : 0);
         result = 31 * result + countDzikir;

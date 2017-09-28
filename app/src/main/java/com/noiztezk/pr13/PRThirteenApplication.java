@@ -2,6 +2,7 @@ package com.noiztezk.pr13;
 
 import android.app.Application;
 
+import com.facebook.stetho.Stetho;
 import com.raizlabs.android.dbflow.config.FlowConfig;
 import com.raizlabs.android.dbflow.config.FlowManager;
 
@@ -17,6 +18,7 @@ public class PRThirteenApplication extends Application {
     public void onCreate() {
         super.onCreate();
         onCreateReal();
+        Stetho.initializeWithDefaults(this);
     }
 
     protected void onCreateReal(){

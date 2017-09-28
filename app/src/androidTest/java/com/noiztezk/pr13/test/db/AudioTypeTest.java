@@ -9,7 +9,6 @@ import com.noiztezk.pr13.test.dagger.TestComponent;
 import com.noiztezk.db.AudioType;
 import com.noiztezk.db.AudioType_Table;
 import com.noiztezk.db.DzikirDatabase;
-import com.raizlabs.android.dbflow.sql.language.Condition;
 import com.raizlabs.android.dbflow.sql.language.Delete;
 import com.raizlabs.android.dbflow.sql.language.Select;
 
@@ -48,11 +47,11 @@ public class AudioTypeTest {
         audioType.save();
 
         AudioType mp3 = new Select().from(AudioType.class)
-                .where(Condition.column(AudioType_Table.audioExtension.getNameAlias()).eq("mp3"))
+                .where(AudioType_Table.audioExtension.eq("mp3"))
                 .querySingle();
 
         AudioType m4a = new Select().from(AudioType.class)
-                .where(Condition.column(AudioType_Table.audioExtension.getNameAlias()).eq("m4a"))
+                .where(AudioType_Table.audioExtension.eq("m4a"))
                 .querySingle();
 
         Assert.assertThat(mp3.getAudioExtension(), notNullValue());

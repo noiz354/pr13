@@ -5,8 +5,7 @@ import com.raizlabs.android.dbflow.annotation.Database;
 /**
  * Created by hafizhhabiby on 5/5/16.
  */
-@Database(name = DzikirDatabase.NAME, version = DzikirDatabase.VERSION
-        , foreignKeysSupported = true)
+@Database(name = DzikirDatabase.NAME, version = DzikirDatabase.VERSION)
 public class DzikirDatabase {
     public static final String NAME = "DzikirDatabase";
 

@@ -15,7 +15,7 @@ public class AudioType extends BaseModel {
     @PrimaryKey(
             autoincrement = true
     )
-    Long id;
+    long id;
 
     @Column
     String audioExtension;

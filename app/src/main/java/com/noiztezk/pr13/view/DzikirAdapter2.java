@@ -28,7 +28,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
@@ -65,17 +65,17 @@ public class DzikirAdapter2 extends RecyclerView.Adapter<DzikirAdapter2.ViewHold
         Dzikir dzikir;
         int position;
 
-        @Bind(R.id.count)
+        @BindView(R.id.count)
         TextView count;
-        @Bind(R.id.text)
+        @BindView(R.id.text)
         TextView text;
-        @Bind(R.id.audio)
+        @BindView(R.id.audio)
         ImageButton audio;
-        @Bind(R.id.container)
+        @BindView(R.id.container)
         RelativeLayout container;
-        @Bind(R.id.read)
+        @BindView(R.id.read)
         ImageView read;
-        @Bind(R.id.name)
+        @BindView(R.id.name)
         TextView name;
 
         public ViewHolder(View itemView) {

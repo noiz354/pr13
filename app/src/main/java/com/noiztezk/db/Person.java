@@ -19,7 +19,7 @@ public class Person  extends BaseModel {
     @PrimaryKey(
             autoincrement = true
     )
-    Long id;
+    long id;
 
     @Column
     String name;
@@ -39,11 +39,11 @@ public class Person  extends BaseModel {
     @Column
     long logoutTimeStamp;
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -102,9 +102,9 @@ public class Person  extends BaseModel {
 
         Person person = (Person) o;
 
+        if (id != person.id) return false;
         if (loginTimeStamp != person.loginTimeStamp) return false;
         if (logoutTimeStamp != person.logoutTimeStamp) return false;
-        if (id != null ? !id.equals(person.id) : person.id != null) return false;
         if (name != null ? !name.equals(person.name) : person.name != null) return false;
         if (age != null ? !age.equals(person.age) : person.age != null) return false;
         if (email != null ? !email.equals(person.email) : person.email != null) return false;
@@ -114,7 +114,7 @@ public class Person  extends BaseModel {
 
     @Override
     public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
+        int result = (int) (id ^ (id >>> 32));
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (age != null ? age.hashCode() : 0);
         result = 31 * result + (email != null ? email.hashCode() : 0);

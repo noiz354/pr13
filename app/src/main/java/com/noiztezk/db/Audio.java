@@ -18,7 +18,7 @@ public class Audio extends BaseModel {
     @PrimaryKey(
             autoincrement = true
     )
-    Long id;
+    long id;
 
     @Column
     String path;
@@ -27,13 +27,13 @@ public class Audio extends BaseModel {
     String metadata;
 
     @ForeignKey(references =
-            {@ForeignKeyReference(columnType = Long.class,
+            {@ForeignKeyReference(
                     columnName = "AudioId",
                     foreignKeyColumnName = "id")})
     AudioType audioType;
 
     @ForeignKey(references =
-            {@ForeignKeyReference(columnType = Long.class,
+            {@ForeignKeyReference(
                     columnName = "DzikirId",
                     foreignKeyColumnName = "id")})
     Dzikir dzikir;

@@ -24,7 +24,6 @@ import com.noiztezk.pr13.presenters.DzkirDetail;
 import com.noiztezk.pr13.presenters.DzkirDetailImpl;
 import com.noiztezk.pr13.presenters.DzkirDetailView;
 import com.noiztezk.pr13.utils.Constants;
-import com.raizlabs.android.dbflow.sql.language.SQLCondition;
 import com.raizlabs.android.dbflow.sql.language.Select;
 
 import org.joda.time.DateTime;
@@ -36,9 +35,10 @@ import java.util.Date;
 import java.util.List;
 
 import at.markushi.ui.CircleButton;
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.Unbinder;
 
 /**
  * Created by Normansyah Putra on 7/26/2015.
@@ -50,12 +50,13 @@ public class DzkirDetailCounterFragment extends Fragment implements DzkirDetailV
 
     DzkirDetail dzkirDetail;
 
-    @Bind(R.id.counterButton)
+    @BindView(R.id.counterButton)
     at.markushi.ui.CircleButton counterButton;
-    @Bind(R.id.btnNumNotif)
+    @BindView(R.id.btnNumNotif)
     Button mCurrent;
-    @Bind(R.id.arabic)
+    @BindView(R.id.arabic)
     TextView arabic;
+    private Unbinder bind;
 
     public static DzkirDetailCounterFragment newInstance(Person person, Dzikir data){
         Bundle arguments = new Bundle();
@@ -87,7 +88,7 @@ public class DzkirDetailCounterFragment extends Fragment implements DzkirDetailV
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View base = inflater.inflate(R.layout.dzkir_counter_layout, null);
-        ButterKnife.bind(this, base);
+        bind = ButterKnife.bind(this, base);
         dzkirDetail = new DzkirDetailImpl(this);
         dzkirDetail.printAllQuery();
         dzkirDetail.handleArgument(getArguments());
@@ -114,7 +115,7 @@ public class DzkirDetailCounterFragment extends Fragment implements DzkirDetailV
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        ButterKnife.unbind(this);
+        bind.unbind();
     }
 
     @Override

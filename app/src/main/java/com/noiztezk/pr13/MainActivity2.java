@@ -27,7 +27,6 @@ import com.noiztezk.pr13.model.Dzikir;
 import com.noiztezk.pr13.model.Example;
 import com.noiztezk.pr13.presenters.HomeView;
 import com.noiztezk.pr13.view.DzikirAdapter2;
-import com.raizlabs.android.dbflow.sql.language.Condition;
 import com.raizlabs.android.dbflow.sql.language.Select;
 
 import java.io.IOException;
@@ -37,23 +36,23 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
  * Created by noiz354 on 4/28/16.
  */
 public class MainActivity2 extends AppCompatActivity implements HomeView {
-    @Bind(R.id.coor_layout_main_activity2)
+    @BindView(R.id.coor_layout_main_activity2)
     CoordinatorLayout coordinatorLayout;
 
-    @Bind(R.id.toolbar_main_activity2)
+    @BindView(R.id.toolbar_main_activity2)
     Toolbar toolbarMainActivity2;
 
-    @Bind(R.id.appbar_main_activity2)
+    @BindView(R.id.appbar_main_activity2)
     AppBarLayout appBarMainActivity2;
 
-    @Bind(R.id.recylerview_main_activity2)
+    @BindView(R.id.recylerview_main_activity2)
     RecyclerView recyclerViewMainActivity2;
 
     @Inject
@@ -92,8 +91,7 @@ public class MainActivity2 extends AppCompatActivity implements HomeView {
             }
         }else{
             person = new Select().from(Person.class).where(
-                    Condition.column(Person_Table.name.getNameAlias())
-                            .eq(getUnIdentifiedPerson(getUnIdentifiedPerson()).getName()))
+                    Person_Table.name.eq(getUnIdentifiedPerson(getUnIdentifiedPerson()).getName()))
                     .querySingle();
             List<com.noiztezk.db.Dzikir> dbs = new Select().from(
                     com.noiztezk.db.Dzikir.class
@@ -201,10 +199,7 @@ public class MainActivity2 extends AppCompatActivity implements HomeView {
 
     @Nullable
     public static Dzikir fromDzikirName(String name){
-        com.noiztezk.db.Dzikir dzikir
-                = new Select().from(com.noiztezk.db.Dzikir.class).where(
-                    Condition.column(Dzikir_Table.dzikirName.getNameAlias()).eq(name)
-                ).querySingle();
+        com.noiztezk.db.Dzikir dzikir = new Select().from(com.noiztezk.db.Dzikir.class).where(Dzikir_Table.dzikirName.eq(name)).querySingle();
         return dzikir == null ? null : fromDzikirDb(dzikir);
     }
 
@@ -212,7 +207,7 @@ public class MainActivity2 extends AppCompatActivity implements HomeView {
     public static com.noiztezk.db.Dzikir fromDzikirNameDb(String name){
         com.noiztezk.db.Dzikir dzikir
                 = new Select().from(com.noiztezk.db.Dzikir.class).where(
-                Condition.column(Dzikir_Table.dzikirName.getNameAlias()).eq(name)
+                Dzikir_Table.dzikirName.eq(name)
         ).querySingle();
         return dzikir;
     }

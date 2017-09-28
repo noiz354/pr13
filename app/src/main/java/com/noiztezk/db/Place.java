@@ -20,7 +20,7 @@ public class Place extends BaseModel {
     @PrimaryKey(
             autoincrement = true
     )
-    Long id;
+    long id;
 
     @Column
     String placeDescription;
@@ -32,7 +32,7 @@ public class Place extends BaseModel {
     long latitude;
 
     @ForeignKey(references =
-            {@ForeignKeyReference(columnType = Long.class,
+            {@ForeignKeyReference(
                     columnName = "DzikirId",
                     foreignKeyColumnName = "id")})
     Dzikir dzikir;

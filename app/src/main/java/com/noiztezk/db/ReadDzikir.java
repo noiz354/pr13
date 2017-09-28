@@ -21,17 +21,15 @@ public class ReadDzikir extends BaseModel{
     @PrimaryKey(
             autoincrement = true
     )
-    Long id;
+    long id;
 
     @ForeignKey(references =
-            {@ForeignKeyReference(columnType = Long.class,
-                    columnName = "PersonId",
+            {@ForeignKeyReference(columnName = "PersonId",
                     foreignKeyColumnName = "id")})
     Person person;
 
     @ForeignKey(references =
-            {@ForeignKeyReference(columnType = Long.class,
-                    columnName = "DzikirId",
+            {@ForeignKeyReference(columnName = "DzikirId",
                     foreignKeyColumnName = "id")})
     Dzikir dzikir;
 
@@ -48,8 +46,7 @@ public class ReadDzikir extends BaseModel{
     int countByPerson;
 
     @ForeignKey(references =
-            {@ForeignKeyReference(columnType = Long.class,
-                    columnName = "PlaceId",
+            {@ForeignKeyReference(columnName = "PlaceId",
                     foreignKeyColumnName = "id")})
     Place place;
 
@@ -61,11 +58,11 @@ public class ReadDzikir extends BaseModel{
         this.countByPerson = countByPerson;
     }
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
