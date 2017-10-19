@@ -86,7 +86,7 @@ public class DzkirDetailActivity extends AppCompatActivity {
         super.onBackPressed();
         DzkirDetailCounterFragment fragment = (DzkirDetailCounterFragment)getSupportFragmentManager().findFragmentByTag(DzkirDetailCounterFragment.TAG);
         data = fragment.getDzikir();
-        Intent moveToOtherActivity = new Intent(this, MainActivity2.class);
+        Intent moveToOtherActivity = new Intent(this, HomeActivity.class);
         Bundle bndlanimation =
                 ActivityOptions.makeCustomAnimation(this, R.anim.animation, R.anim.animation2).toBundle();
         moveToOtherActivity.putExtra(Constants.STATIC_VALUE.DATA_DZIKIR, Parcels.wrap(data));

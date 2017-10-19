@@ -13,9 +13,8 @@ import android.test.suitebuilder.annotation.LargeTest;
 import android.view.View;
 
 import com.google.gson.Gson;
+import com.noiztezk.pr13.App;
 import com.noiztezk.pr13.HomeActivity;
-import com.noiztezk.pr13.MainActivity2;
-import com.noiztezk.pr13.PRThirteenApplication;
 import com.noiztezk.pr13.R;
 import com.noiztezk.pr13.test.recyclerview.RecyclerViewInteraction;
 import com.noiztezk.pr13.test.dagger.TestComponent;
@@ -57,9 +56,9 @@ public class MainActivity2Test {
     @Before
     public void setUp(){
         Instrumentation instrumentation = InstrumentationRegistry.getInstrumentation();
-        PRThirteenApplication app
-                = (PRThirteenApplication) instrumentation.getTargetContext().getApplicationContext();
-        TestComponent component = (TestComponent) app.getmNetComponent();
+        App app
+                = (App) instrumentation.getTargetContext().getApplicationContext();
+        TestComponent component = (TestComponent) app.getMNetComponent();
         component.inject(this);
 
         try {
@@ -74,8 +73,8 @@ public class MainActivity2Test {
      * rules adalah interceptor yang dieksekusi dari setiap metode dan dijalankan sebelum setup code {@link Before @Before }
      */
     @Rule
-    public ActivityTestRule<MainActivity2> mActivityRule = new ActivityTestRule<MainActivity2>(
-            MainActivity2.class,
+    public ActivityTestRule<HomeActivity> mActivityRule = new ActivityTestRule<HomeActivity>(
+            HomeActivity.class,
             true, // initialTouchMode
             false // launchActivity. False so we can customize the intent per test method
     );

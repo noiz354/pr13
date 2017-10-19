@@ -1,6 +1,6 @@
 package com.noiztezk.pr13.test.ui;
 
-import com.noiztezk.pr13.MainActivity2;
+import com.noiztezk.pr13.HomeActivity;
 import com.noiztezk.pr13.R;
 import com.noiztezk.pr13.test.utils.TestUtils;
 
@@ -29,7 +29,7 @@ import android.support.test.espresso.contrib.RecyclerViewActions;
 public class TapAction {
 
     @Rule
-    public final ActivityTestRule<MainActivity2> main = new ActivityTestRule<>(MainActivity2.class);
+    public final ActivityTestRule<HomeActivity> main = new ActivityTestRule<>(HomeActivity.class);
 
     /**
      * Test for Dzkir-13

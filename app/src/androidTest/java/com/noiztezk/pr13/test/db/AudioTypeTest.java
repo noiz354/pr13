@@ -30,9 +30,9 @@ public class AudioTypeTest {
     @Before
     public void setUp(){
         Instrumentation instrumentation = InstrumentationRegistry.getInstrumentation();
-        PRThirteenApplication app
-                = (PRThirteenApplication) instrumentation.getTargetContext().getApplicationContext();
-        component = (TestComponent) app.getmNetComponent();
+        App app
+                = (App) instrumentation.getTargetContext().getApplicationContext();
+        component = (TestComponent) app.getMNetComponent();
         component.inject(this);
     }
 

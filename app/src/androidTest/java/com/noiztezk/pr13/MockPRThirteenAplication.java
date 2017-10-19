@@ -14,13 +14,13 @@ import java.lang.reflect.Field;
 /**
  * Created by noiz354 on 4/29/16.
  */
-public class MockPRThirteenAplication extends PRThirteenApplication {
+public class MockPRThirteenAplication extends App {
 
     @Override
     protected void onCreateReal() {
         FlowManager.destroy();
 //        resetSingleton(FlowManager.class, "globalDatabaseHolder");
-        TestComponent testComponent = (TestComponent) getmNetComponent();
+        TestComponent testComponent = (TestComponent) getMNetComponent();
         testComponent.provideApplication().deleteDatabase(DzikirDatabase.NAME + ".db");
         FlowManager.init(new FlowConfig.Builder(this).build());
         testComponent.sharedPreferences().edit().clear().apply();

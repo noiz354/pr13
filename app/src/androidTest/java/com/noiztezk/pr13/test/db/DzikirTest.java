@@ -36,7 +36,7 @@ public class DzikirTest {
         MockPRThirteenAplication mockPRThirteenAplication = (MockPRThirteenAplication)
                 getTargetContext().getApplicationContext();
 
-        component = (TestComponent) mockPRThirteenAplication.getmNetComponent();
+        component = (TestComponent) mockPRThirteenAplication.getMNetComponent();
         component.inject(this);
     }
 

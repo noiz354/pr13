@@ -163,6 +163,7 @@ class HomeActivity : AppCompatActivity(), HomeView {
     }
 
     companion object {
+        @Throws(IOException::class)
         @JvmStatic fun getData(context: Context, gson: Gson): MutableList<com.noiztezk.pr13.model.Dzikir>? {
             val inputStream:InputStream = context.assets.open(DEF_PR13_JSON)
             val buffer: ByteArray = ByteArray(inputStream.available())
