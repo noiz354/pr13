@@ -13,6 +13,7 @@ import android.test.suitebuilder.annotation.LargeTest;
 import android.view.View;
 
 import com.google.gson.Gson;
+import com.noiztezk.pr13.HomeActivity;
 import com.noiztezk.pr13.MainActivity2;
 import com.noiztezk.pr13.PRThirteenApplication;
 import com.noiztezk.pr13.R;
@@ -62,7 +63,7 @@ public class MainActivity2Test {
         component.inject(this);
 
         try {
-            readjsonDzikir = MainActivity2.getData(InstrumentationRegistry.getContext(),gson);
+            readjsonDzikir = HomeActivity.getData(InstrumentationRegistry.getContext(),gson);
         }catch(IOException ioe){
             ioe.printStackTrace();
         }
@@ -84,7 +85,7 @@ public class MainActivity2Test {
         mActivityRule.launchActivity(new Intent());
 
             RecyclerViewInteraction.
-                    <Dzikir>onRecyclerView(ViewMatchers.withId(R.id.recylerview_main_activity2))
+                    <Dzikir>onRecyclerView(ViewMatchers.withId(R.id.recylerview_main_activity))
                     .withItems(readjsonDzikir)
                     .check(new RecyclerViewInteraction.ItemViewAssertion<Dzikir>() {
                         @Override
@@ -100,7 +101,7 @@ public class MainActivity2Test {
     public void performClickAtRecyclerView(){
         mActivityRule.launchActivity(new Intent());
 
-        onView(withId(R.id.recylerview_main_activity2)).perform(
+        onView(withId(R.id.recylerview_main_activity)).perform(
                 RecyclerViewActions.actionOnItemAtPosition(12, TestUtils.clickChildViewWithId(R.id.text)));
 
 

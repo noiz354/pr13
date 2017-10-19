@@ -15,7 +15,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.noiztezk.pr13.DzkirDetailActivity;
-import com.noiztezk.pr13.MainActivity2;
+import com.noiztezk.pr13.HomeActivity;
 import com.noiztezk.pr13.R;
 import com.noiztezk.db.Person;
 import com.noiztezk.pr13.model.Dzikir;
@@ -136,8 +136,8 @@ public class DzikirAdapter2 extends RecyclerView.Adapter<DzikirAdapter2.ViewHold
 
             mContext.startActivity(moveToAnotherActivity, bndlanimation);
 
-            if(mContext != null && mContext instanceof MainActivity2)
-                ((MainActivity2)mContext).finish();
+            if(mContext != null && mContext instanceof HomeActivity)
+                ((HomeActivity)mContext).finish();
         }
     }
 }

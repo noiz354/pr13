@@ -13,7 +13,7 @@ import dagger.Component;
 @Component(modules={AppModule.class, NetModule.class})
 public interface NetComponent {
     Application provideApplication();
-    void inject(MainActivity2 activity2);
+    void inject(HomeActivity homeActivity);
     // void inject(MyFragment fragment);
     // void inject(MyService service);
 }

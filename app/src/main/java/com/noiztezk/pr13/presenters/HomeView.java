@@ -8,7 +8,6 @@ public interface HomeView {
     String FIRST_TIME = "first_time";
     String DEF_PR13_JSON = "def_pr13.json";
 
-    String[] getUnIdentifiedPerson();
     String[] getKnownAudioFormat();
     String getSalamText();
     boolean isFirstTime();

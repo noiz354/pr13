@@ -12,7 +12,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.noiztezk.pr13.MainActivity2;
 import com.noiztezk.pr13.R;
 import com.noiztezk.db.Dzikir_Table;
 import com.noiztezk.db.Person;

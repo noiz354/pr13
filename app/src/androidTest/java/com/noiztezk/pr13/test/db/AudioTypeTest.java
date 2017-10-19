@@ -4,7 +4,7 @@ import android.app.Instrumentation;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
 
-import com.noiztezk.pr13.PRThirteenApplication;
+import com.noiztezk.pr13.App;
 import com.noiztezk.pr13.test.dagger.TestComponent;
 import com.noiztezk.db.AudioType;
 import com.noiztezk.db.AudioType_Table;

@@ -3,7 +3,7 @@ package com.noiztezk.pr13.presenters;
 import android.os.Bundle;
 import android.util.Log;
 
-import com.noiztezk.pr13.MainActivity2;
+import com.noiztezk.pr13.HomeActivity;
 import com.noiztezk.pr13.R;
 import com.noiztezk.db.Dzikir_Table;
 import com.noiztezk.db.Person;
@@ -71,7 +71,7 @@ public class DzkirDetailImpl implements DzkirDetail{
             return;
 
         data = Parcels.unwrap(arguments.getParcelable(Constants.STATIC_VALUE.DATA_DZIKIR));
-        dataDb = MainActivity2.fromDzikirNameDb(data.getName());
+        dataDb = HomeActivity.fromDzikirNameDb(data.getName());
         person = Parcels.unwrap(arguments.getParcelable(Constants.STATIC_VALUE.DATA_PERSON));
 
         String currentDate = getDate();// get current data

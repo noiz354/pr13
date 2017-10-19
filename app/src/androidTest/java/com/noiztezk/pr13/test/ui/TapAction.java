@@ -38,7 +38,7 @@ public class TapAction {
      */
     @Test
     public void perform_Tap_At_Index_1() {
-        onView(ViewMatchers.withId(R.id.recylerview_main_activity2)).perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
+        onView(ViewMatchers.withId(R.id.recylerview_main_activity)).perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
         onView(withId(R.id.counterButton)).perform(click());
         onView(withId(R.id.counterButton)).perform(click());
         onView(withId(R.id.counterButton)).perform(click());
@@ -56,7 +56,7 @@ public class TapAction {
      */
     @Test
     public void test_Dzikir7() {
-        onView(withId(R.id.recylerview_main_activity2)).perform(RecyclerViewActions.actionOnItemAtPosition(8, click()));
+        onView(withId(R.id.recylerview_main_activity)).perform(RecyclerViewActions.actionOnItemAtPosition(8, click()));
         onView(withId(R.id.arabic)).check(matches(withText("بِسْمِ اللَّهِ الَّذِیْ لَا یَضُرُّ مَعَ اسْمِهِ شَیْ ءٌ فِیْ الْاَرْضِ وَلَا فِی السَّمَآءِ وَھُوَ السَّمِیْعُ الْعَلِیْمُ")));
     }
 
@@ -68,8 +68,8 @@ public class TapAction {
     @Test
     public void test_Dzikir8() {
         takeScreenShot();
-        onView(withId(R.id.recylerview_main_activity2)).perform(RecyclerViewActions.scrollToPosition(12));
-        onView(withId(R.id.recylerview_main_activity2)).perform(RecyclerViewActions.actionOnItemAtPosition(12, click()));
+        onView(withId(R.id.recylerview_main_activity)).perform(RecyclerViewActions.scrollToPosition(12));
+        onView(withId(R.id.recylerview_main_activity)).perform(RecyclerViewActions.actionOnItemAtPosition(12, click()));
 //        onView(withId(R.id.arabic)).check(matches(withText("سُبْحَانَ اللّهِ وَ بِحَمْدِهِ ، سُبْحَانَ اللّهِ الْعَظِيمِ")));
         onView(withId(R.id.counterButton)).perform(click());
         onView(withId(R.id.counterButton)).perform(click());
@@ -89,7 +89,7 @@ public class TapAction {
      */
     @Test
     public void test_Dzikir9() {
-        onView(withId(R.id.recylerview_main_activity2)).perform(RecyclerViewActions.actionOnItemAtPosition(11, click()));
+        onView(withId(R.id.recylerview_main_activity)).perform(RecyclerViewActions.actionOnItemAtPosition(11, click()));
         onView(allOf(withId(R.id.arabic), withContentDescription("Hello!"))).check(matches(withText("سُبْحَانَ اللّهِ ، والْحَمْدُللّهِ ، وَ لا اِلهَ اِلَّا اللّهُ ، وَ اللّهُ اَكْبَرُ ، وَ لا حَوْلَ وَ لا قُوَّةَ اِلَّا بِاللّهِ -")));
     }
 
@@ -144,7 +144,7 @@ public class TapAction {
      */
     @Test
     public void test_Dzikir10() {
-        onView(withId(R.id.recylerview_main_activity2)).perform(RecyclerViewActions.actionOnItemAtPosition(11, click()));
+        onView(withId(R.id.recylerview_main_activity)).perform(RecyclerViewActions.actionOnItemAtPosition(11, click()));
         onView(withId(R.id.arabic)).check(matches(withText("سُبْحَانَ اللّهِ ، والْحَمْدُللّهِ ، وَ لا اِلهَ اِلَّا اللّهُ ، وَ اللّهُ اَكْبَرُ ، وَ لا حَوْلَ وَ لا قُوَّةَ اِلَّا بِاللّهِ -")));
     }
 
@@ -158,7 +158,7 @@ public class TapAction {
 //        tapRecyclerViewItem(R.id.recylerview_main_activity2, 12);
 //        onView(withId(R.id.recylerview_main_activity2)).perform(RecyclerViewActions.actionOnItemAtPosition(12, click()));
 
-        onView(withId(R.id.recylerview_main_activity2)).perform(
+        onView(withId(R.id.recylerview_main_activity)).perform(
                 RecyclerViewActions.actionOnItemAtPosition(0, TestUtils.clickChildViewWithId(R.id.text)));
 
 //        SystemClock.sleep(1000);
