@@ -1,0 +1,166 @@
+{
+   "version":"0.02",
+   "version_created":[
+      "2015-06-23",
+      "2016-04-29"
+   ],
+   "created_by":"M Normansyah Putra ND",
+   "dzkir":[
+      {
+         "name":"satu",
+         "text":"لا اِلهَ اِلَّا اللّهُ وَحْدَهُ لا شَرِيكَ لَهُ ، لَهُ الْمُلْكُ وَ لَهُ الْحَمْدُ وَ هُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ",
+         "audio":"kosong",
+         "count":"100",
+         "read":[
+            "morning",
+            "midday",
+            "afternoon",
+            "night"
+         ]
+      },
+      {
+         "name":"dua",
+         "text":"سُبْحَانَ اللّهِ وَ بِحَمْدِهِ",
+         "audio":"kosong",
+         "count":"100",
+         "read":[
+            "morning",
+            "midday",
+            "afternoon",
+            "night"
+         ]
+      },
+      {
+         "name":"tiga",
+         "text":"سُبْحَانَ اللّهِ وَ بِحَمْدِهِ ، سُبْحَانَ اللّهِ الْعَظِيمِ",
+         "audio":"kosong",
+         "count":"-1",
+         "read":[
+            "morning",
+            "midday",
+            "afternoon",
+            "night"
+         ]
+      },
+      {
+         "name":"empat",
+         "text":"لْحَمْدُللّهِ",
+         "audio":"kosong",
+         "count":"-1",
+         "read":[
+            "morning",
+            "midday",
+            "afternoon",
+            "night"
+         ]
+      },
+      {
+         "name":"lima",
+         "text":"أَسْتَغْفِرُ اللَّهَ الْعَظِيمَ الَّذِي لاَ إِلَهَ إِلاَّ هُوَ الْحَيُّ الْْقَيُّومُ وَ أَتُوبُ إِلَيْهِ",
+         "audio":"kosong",
+         "count":"-1",
+         "read":[
+            "morning",
+            "midday",
+            "afternoon",
+            "night"
+         ]
+      },
+      {
+         "name":"enam",
+         "text":"رَضيـتُ بِاللهِ رَبَّـاً وَبِالإسْلامِ ديـناً وَبِمُحَـمَّدٍ صلى الله عليه وسلم نَبِيّـاً ورسولا",
+         "audio":"kosong",
+         "count":"-1",
+         "read":[
+            "morning",
+            "midday",
+            "afternoon",
+            "night"
+         ]
+      },
+      {
+         "name":"tujuh",
+         "text":"سبحانك اللهم وبحمدك اشهدان لااله الا انت استغفرك واتوب اليك",
+         "audio":"kosong",
+         "count":"-1",
+         "read":[
+            "morning",
+            "midday",
+            "afternoon",
+            "night"
+         ]
+      },
+      {
+         "name":"delapan",
+         "text":"رب اغفر لي و ارحمني و تب علي",
+         "audio":"kosong",
+         "count":"100",
+         "read":[
+            "morning",
+            "midday",
+            "afternoon",
+            "night"
+         ]
+      },
+      {
+         "name":"sembilan",
+         "text":"بِسْمِ اللَّهِ الَّذِیْ لَا یَضُرُّ مَعَ اسْمِهِ شَیْ ءٌ فِیْ الْاَرْضِ وَلَا فِی السَّمَآءِ وَھُوَ السَّمِیْعُ الْعَلِیْمُ",
+         "audio":"kosong",
+         "count":"3",
+         "read":[
+            "morning",
+            "midday",
+            "afternoon",
+            "night"
+         ]
+      },
+      {
+         "name":"sepuluh",
+         "text":"اَللَّهُمَّ أَنْتَ رَبِّيْ لاَ إِلَـهَ إِلاَّ أَنْتَ، خَلَقْتَنِيْ وَأَنَا عَبْدُكَ، وَأَنَا عَلَى عَهْدِكَ وَوَعْدِكَ مَا اسْتَطَعْتُ، أَعُوْذُ بِكَ مِنْ شَرِّ مَا صَنَعْتُ، أَبُوْءُ لَكَ بِنِعْمَتِكَ ",
+         "audio":"kosong",
+         "count":"1",
+         "read":[
+            "morning",
+            "midday",
+            "afternoon",
+            "night"
+         ]
+      },
+      {
+         "name":"sebelas",
+         "text":"لَآ اِلهَ اِلاَّ اللّهُ وَاحِدًا اَحَدًا صَمَدًا لَّمْ يَتَّخِذْ صَاحِبَةً وَّ لاَ وَلَدًا وَّ لَمْ يَكُنْ لَّوْ كُفُوًا اَحَدٌ",
+         "audio":"kosong",
+         "count":"-1",
+         "read":[
+            "morning",
+            "midday",
+            "afternoon",
+            "night"
+         ]
+      },
+      {
+         "name":"dua belas",
+         "text":"سُبْحَانَ اللّهِ ، والْحَمْدُللّهِ ، وَ لا اِلهَ اِلَّا اللّهُ ، وَ اللّهُ اَكْبَرُ ، وَ لا حَوْلَ وَ لا قُوَّةَ اِلَّا بِاللّهِ -",
+         "audio":"kosong",
+         "count":"-1",
+         "read":[
+            "morning",
+            "midday",
+            "afternoon",
+            "night"
+         ]
+      },
+      {
+         "name":"tiga belas",
+         "text":"سُبْحَانَ اللّهِ ، والْحَمْدُللّهِ ، وَ لا اِلهَ اِلَّا اللّهُ ، وَ اللّهُ اَكْبَرُ",
+         "audio":"kosong",
+         "count":"-1",
+         "read":[
+            "morning",
+            "midday",
+            "afternoon",
+            "night"
+         ]
+      }
+   ]
+}
