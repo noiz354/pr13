@@ -7,6 +7,11 @@ import android.support.test.espresso.util.HumanReadables;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+/**
+ * TODO fix same value failed test
+ *
+ * @param <A>
+ */
 public class RecyclerItemViewAssertion<A> implements ViewAssertion {
 
     private int position;

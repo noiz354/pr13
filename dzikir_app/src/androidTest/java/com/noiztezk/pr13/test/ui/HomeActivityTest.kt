@@ -22,7 +22,6 @@ import com.noiztezk.pr13.R
 import com.noiztezk.pr13.model.Dzikir
 import com.noiztezk.pr13.presenters.HomeView
 import com.noiztezk.pr13.test.dagger.TestComponent
-import com.noiztezk.pr13.test.recyclerview.RecyclerViewInteraction
 import com.noiztezk.pr13.test.utils.TestUtils
 import org.hamcrest.Matchers.allOf
 import org.junit.Assert
@@ -73,17 +72,14 @@ class HomeActivityTest {
     }
 
     @Test
-    fun checkFirstRow() {
+    fun checkAllRows() {
         mActivityRule.launchActivity(Intent())
 
         readjsonDzikir?.let {
             for (i in 0..it.size - 1) {
-                RecyclerViewInteraction.onRecyclerView<Dzikir>(ViewMatchers.withId(R.id.recylerview_main_activity))
-                        .withItems(it)
-                        .check { item, view, e ->
-                            matches(hasDescendant(withText(item.text)))
-                                    .check(view, e)
-                        }
+                TestUtils.withRecyclerView(R.id.recylerview_main_activity)
+                        .atPositionOnView(i, R.id.text)
+                        .matches(withText(it[i].name))
             }
         }
     }
