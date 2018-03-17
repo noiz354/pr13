@@ -6,8 +6,7 @@ import com.google.gson.Gson;
 import com.noiztezk.pr13.NetComponent;
 import com.noiztezk.pr13.test.db.AudioTypeTest;
 import com.noiztezk.pr13.test.db.DzikirTest;
-import com.noiztezk.pr13.test.ui.MainActivity2Test;
-import com.noiztezk.pr13.test.ui.MainActivityTest;
+import com.noiztezk.pr13.test.ui.HomeActivityTest;
 
 import javax.inject.Singleton;
 
@@ -19,7 +18,7 @@ public interface TestComponent extends NetComponent {
     SharedPreferences sharedPreferences();
     Gson gson();
     void inject(AudioTypeTest audioTypeTest);
-    void inject(MainActivityTest mainActivityTest);
-    void inject(MainActivity2Test mainActivity2Test);
+
+    void inject(HomeActivityTest homeActivityTest);
     void inject(DzikirTest dzikirTest);
 }
