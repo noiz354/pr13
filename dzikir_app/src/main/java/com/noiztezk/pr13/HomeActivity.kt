@@ -16,9 +16,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import com.google.gson.Gson
-import com.noiztezk.db.AudioType
-import com.noiztezk.db.Dzikir
-import com.noiztezk.db.Person
+import com.noiztezk.db.*
 import com.noiztezk.pr13.model.Example
 import com.noiztezk.pr13.presenters.HomeView
 import com.noiztezk.pr13.presenters.HomeView.DEF_PR13_JSON
