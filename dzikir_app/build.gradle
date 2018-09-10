@@ -19,12 +19,6 @@ android {
         debug {
             storeFile file("debug.keystore")
         }
-        release {
-            storeFile file('../androidkey/tkpd-key.keystore')
-            storePassword "tokopedia789"
-            keyAlias "tkpd"
-            keyPassword "tokopedia789"
-        }
     }
     buildTypes {
         debug {
