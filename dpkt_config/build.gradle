@@ -7,7 +7,7 @@ android {
     buildToolsVersion '27.0.3'
 
     defaultConfig {
-        applicationId "com.noiztezk.pr13"
+        applicationId "com.tokopedia.tkpd"
         minSdkVersion 22
         targetSdkVersion 27
         versionCode 1
@@ -128,6 +128,7 @@ dependencies {
 
     // Google Sign In SDK (only required for Google Sign In)
     implementation 'com.google.android.gms:play-services-auth:15.0.0'
+    implementation 'com.google.firebase:firebase-ml-vision:15.0.0'
     implementation 'com.github.esafirm.android-image-picker:imagepicker:1.13.0'
     androidTestImplementation files('libs/crema-1.0.jar')
 }
