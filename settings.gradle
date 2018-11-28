@@ -1,1 +1,1 @@
-include ':dzikir_app'
+include ':dzikir_app', ':track'
