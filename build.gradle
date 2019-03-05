@@ -30,6 +30,6 @@ allprojects {
     }
 }
 
-//task wrapper(type: Wrapper) {
-//    gradleVersion = '4.1' //version required
-//}
+task wrapper(type: Wrapper) {
+    gradleVersion = '4.10.1' //version required
+}
