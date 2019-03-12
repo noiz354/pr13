@@ -7,7 +7,6 @@ import com.raizlabs.android.dbflow.config.FlowManager
 import net.danlew.android.joda.JodaTimeAndroid
 import com.facebook.stetho.dumpapp.DumperPlugin
 import com.facebook.stetho.DumperPluginsProvider
-import com.frogermcs.androiddevmetrics.AndroidDevMetrics
 
 
 /**
@@ -30,8 +29,5 @@ open class App : MultiDexApplication() {
         JodaTimeAndroid.init(this)
         FlowManager.init(FlowConfig.Builder(this).build())
         Stetho.initializeWithDefaults(this)
-        if(BuildConfig.DEBUG){
-            AndroidDevMetrics.initWith(this)
-        }
     }
 }
