@@ -5,6 +5,7 @@ import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
+import android.support.v7.widget.AppCompatImageView
 import android.util.AttributeSet
 import android.util.TypedValue
 import android.widget.ImageView
@@ -13,7 +14,7 @@ import com.noiztezk.pr13.R
 /**
  * Created by normansyahputa on 9/28/17.
  */
-class CircleButton @JvmOverloads constructor(context: Context, attributeSet: AttributeSet?, defStyle: Int = 0) : ImageView(context, attributeSet, defStyle) {
+class CircleButton @JvmOverloads constructor(context: Context, attributeSet: AttributeSet?, defStyle: Int = 0) : AppCompatImageView(context, attributeSet, defStyle) {
     val PRESSED_COLOR_LIGHTUP = 255/25
     val PRESSED_RING_ALPHA = 75
     val DEFAULT_PRESSED_RING_WIDTH_DIP = 4f
