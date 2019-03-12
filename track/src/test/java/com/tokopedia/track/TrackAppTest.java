@@ -15,20 +15,6 @@ import org.robolectric.RuntimeEnvironment;
 @RunWith(RobolectricTestRunner.class)
 public class TrackAppTest  {
     @Test
-    public void simpleTest(){
-        TrackApp trackApp = new TrackApp();
-        GTMSuicide gtm = (GTMSuicide) trackApp.getValue("GTM");
-
-        new Thread(() ->{
-            gtm.sendEvent("*saya*");
-        }).run();
-
-        new Thread(() ->{
-            gtm.sendEvent("*delay*");
-        }).run();
-    }
-
-    @Test
     public void testAja(){
         TrackApp.initTrackApp(RuntimeEnvironment.application.getApplicationContext());
         TrackApp trackApp = TrackApp.getInstance();

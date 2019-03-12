@@ -7,7 +7,7 @@ def main(argv):
     user = None
     gradle = "./gradlew" 
     adb = "adb"
-    deviceId = "galaxy.tkpd:7437"
+    deviceId = "galaxy.tkpd:7521"
 
     try:
         opts, args = getopt.getopt(argv,"h",["token=","config=", "head=", "user=", "gradle=", "adb=", "deviceId="])
@@ -66,7 +66,7 @@ def detectAffectedModule(token, config, head, user, gradle, adb, deviceId):
     for module in modulesAffected:
         print doCommand(gradle + " " + module + "customjacocoTestCoverageVerification --stacktrace")
 
-    doCommand(gradle + " sonarqube -Dsonar.host.url=http://10.164.8.12:9111")
+    doCommand(gradle + " sonarqube -Dsonar.host.url=http://10.164.8.12:9002")
     
     for path in pathAffected:
         doCommand("zip -r " + path[1] + "Result.zip ./" + path[0] + "build/reports/coverage/debug")
