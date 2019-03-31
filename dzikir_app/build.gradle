@@ -60,9 +60,10 @@ def dbflow_version = "4.1.1"
 // or 10-digit short-hash of a specific commit. (Useful for bugs fixed in develop, but not in a release yet)
 
 dependencies {
-//    implementation fileTree(include: ['*.jar'], dir: 'libs')
 
+    //    implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'com.facebook.stetho:stetho-okhttp3:1.5.0'
+
     //[START] Dagger dependency
 
     // apt command comes from the android-apt plugin
@@ -130,6 +131,7 @@ dependencies {
     implementation 'com.google.android.gms:play-services-auth:16.0.1'
     implementation 'com.github.esafirm.android-image-picker:imagepicker:1.13.0'
     androidTestImplementation files('libs/crema-1.0.jar')
+    implementation project(':crysp')
 }
 
 // https://stackoverflow.com/questions/46369055/error-fix-the-version-conflict-google-services-plugin-using-productflavors
