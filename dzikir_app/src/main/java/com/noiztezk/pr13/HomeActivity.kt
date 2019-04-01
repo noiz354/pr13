@@ -6,6 +6,7 @@ import android.content.SharedPreferences
 import android.os.Bundle
 import android.support.design.widget.AppBarLayout
 import android.support.design.widget.CoordinatorLayout
+import android.support.design.widget.FloatingActionButton
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
@@ -23,6 +24,7 @@ import com.noiztezk.pr13.presenters.HomeView.DEF_PR13_JSON
 import com.noiztezk.pr13.presenters.HomeView.FIRST_TIME
 import com.noiztezk.pr13.view.DzikirAdapter2
 import com.raizlabs.android.dbflow.sql.language.Select
+import com.tokopedia.crysp.CryspActivity
 import java.io.IOException
 import java.io.InputStream
 import javax.inject.Inject
@@ -30,7 +32,7 @@ import javax.inject.Inject
 /**
  * Created by normansyahputa on 9/29/17.
  */
-class HomeActivity : AppCompatActivity(), HomeView {
+class HomeActivity : CryspActivity(), HomeView {
 
     private var coordinatorLayout:CoordinatorLayout? = null
 
@@ -50,6 +52,9 @@ class HomeActivity : AppCompatActivity(), HomeView {
 
     private var person:Person? = null
 
+    lateinit var fab:FloatingActionButton;
+    lateinit var fab2:FloatingActionButton;
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -59,6 +64,14 @@ class HomeActivity : AppCompatActivity(), HomeView {
         toolbar = findViewById(R.id.toolbar_main_activity)
         appBarLayout = findViewById(R.id.appbar_main_activity)
         recyclerView = findViewById(R.id.recylerview_main_activity)
+        fab = findViewById(R.id.floatingActionButton)
+        fab.setOnClickListener {
+            doexcitingThings()
+            askForContactPermission()
+        }
+
+        fab2 = findViewById(R.id.floatingActionButton2)
+        fab2.setOnClickListener {  test("norman@tokopedia.com")}
 
         if(application is App){
             (application as App).mNetComponent.inject(this)
